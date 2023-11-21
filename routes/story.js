@@ -6,6 +6,10 @@ const ensureLoggedIn = require('../config/ensureLoggedIn')
 
 router.get('/', storyCtrl.index)
 
+router.get('/new', storyCtrl.newStory)
+
+router.get('/:id', storyCtrl.show)
+
 router.post('/', ensureLoggedIn, storyCtrl.create)
 
 router.put('/:id', ensureLoggedIn, storyCtrl.update)
