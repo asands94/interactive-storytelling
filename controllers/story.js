@@ -2,9 +2,23 @@ const Story = require('../models/story')
 
 const index = async (req, res) => {
   try {
-    const story = await Story.find({})
+    const stories = await Story.find({})
 
-    res.json(story)
+    res.render('stories/index', { stories })
+  } catch (e) {
+    res.status(404).json({ error: e.message })
+  }
+}
+
+const newStory = async (req, res) => {
+  res.render('stories/new')
+}
+
+const show = async (req, res) => {
+  try {
+    const story = await Story.findById(req.params.id)
+
+    res.render('stories/show', { story })
   } catch (e) {
     res.status(404).json({ error: e.message })
   }
@@ -12,9 +26,10 @@ const index = async (req, res) => {
 
 const create = async (req, res) => {
   try {
+    req.body.author = req.user
     const story = await Story.create(req.body)
 
-    res.status(201).json(story)
+    res.redirect(`/stories/${story._id}`)
   } catch (e) {
     res.status(500).json({ error: e.message })
   }
@@ -46,6 +61,8 @@ const deleteStory = async (req, res) => {
 
 module.exports = {
   index,
+  newStory,
+  show,
   create,
   update,
   delete: deleteStory,
