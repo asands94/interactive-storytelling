@@ -18,10 +18,10 @@ const storySchema = new Schema(
     content: { type: String, required: true },
     chapters: [{ type: Schema.Types.ObjectId, ref: 'Chapter' }],
     author: { type: Schema.Types.ObjectId, ref: 'Profile' },
-    tags: { type: String, enum: [] },
+    tags: { type: String, enum: ['none'] },
     warning: {
       type: String,
-      enum: ['Extreme Violence', 'Trauma'],
+      enum: ['Violence', 'Trauma'],
     },
     rating: { type: String, enum: ['General', 'Teen', 'Mature', 'Explicit'] },
     summary: { type: String },
