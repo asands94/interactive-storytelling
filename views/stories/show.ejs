@@ -1,7 +1,8 @@
 <%- include('../partials/header') %>
 
-<h2>One Story</h2>
-
+<h2><%=story.title%></h2>
+<h3>Warning: <%=story.warning%></h3>
+<h3>Rating: <%=story.rating%></h3>
 <%-story.content%>
 
 <%- include('../partials/footer') %>
