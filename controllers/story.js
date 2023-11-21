@@ -4,7 +4,7 @@ const index = async (req, res) => {
   try {
     const stories = await Story.find({})
 
-    res.render('stories/index', { stories })
+    res.render('stories/index', { stories, apiKey: process.env.TINY_API  })
   } catch (e) {
     res.status(404).json({ error: e.message })
   }
@@ -18,7 +18,9 @@ const show = async (req, res) => {
   try {
     const story = await Story.findById(req.params.id)
 
-    res.render('stories/show', { story })
+    // const test = tinymce.get("mystoryarea").getContent()
+
+    res.render('stories/show', { story,apiKey: process.env.TINY_API  })
   } catch (e) {
     res.status(404).json({ error: e.message })
   }
