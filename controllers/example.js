@@ -1,4 +1,4 @@
-const Example = require('../models/example')
+const Example = require('../models/story')
 
 const index = async (req, res) => {
   try {
