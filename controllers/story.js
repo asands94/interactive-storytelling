@@ -11,7 +11,7 @@ const index = async (req, res) => {
 }
 
 const newStory = async (req, res) => {
-  res.render('stories/new')
+  res.render('stories/new', { apiKey: process.env.TINY_API })
 }
 
 const show = async (req, res) => {
