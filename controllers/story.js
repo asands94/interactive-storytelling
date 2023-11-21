@@ -1,10 +1,10 @@
-const Example = require('../models/example')
+const Story = require('../models/story')
 
 const index = async (req, res) => {
   try {
-    const example = await Example.find({})
+    const story = await Story.find({})
 
-    res.json(example)
+    res.json(story)
   } catch (e) {
     res.status(404).json({ error: e.message })
   }
@@ -12,9 +12,9 @@ const index = async (req, res) => {
 
 const create = async (req, res) => {
   try {
-    const example = await Example.create(req.body)
+    const story = await Story.create(req.body)
 
-    res.status(201).json(example)
+    res.status(201).json(story)
   } catch (e) {
     res.status(500).json({ error: e.message })
   }
@@ -24,21 +24,21 @@ const update = async (req, res) => {
   try {
     const id = req.params.id
 
-    const example = await Example.findByIdAndUpdate(id, req.body, { new: true })
+    const story = await Story.findByIdAndUpdate(id, req.body, { new: true })
 
-    res.send(example)
+    res.send(story)
   } catch (e) {
     res.status(424).json({ error: e.message })
   }
 }
 
-const deleteExample = async (req, res) => {
+const deleteStory = async (req, res) => {
   try {
     const id = req.params.id
 
-    const example = await Example.findByIdAndDelete(id)
+    const story = await Story.findByIdAndDelete(id)
 
-    res.send(example)
+    res.send(story)
   } catch (e) {
     res.status(404).json({ error: e.message })
   }
@@ -48,5 +48,5 @@ module.exports = {
   index,
   create,
   update,
-  delete: deleteExample,
+  delete: deleteStory,
 }
