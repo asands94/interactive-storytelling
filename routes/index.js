@@ -2,10 +2,17 @@ const express = require('express')
 const router = express.Router()
 
 const passport = require('passport')
+const profileCtrl = require('../controllers/profile')
 
 router.get('/', (req, res, next) => {
   res.render('index', {apiKey: process.env.TINY_API})
 })
+
+router.get('/profile/:id', (req, res, next) => {
+  res.render('profile', {apiKey: process.env.TINY_API})
+})
+
+router.put('/profile/:id', profileCtrl.update)
 
 router.get(
   '/auth/google',

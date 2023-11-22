@@ -26,7 +26,8 @@ passport.use(
         })
 
         const userProfile = await Profile.create({
-          user: user._id
+          user: user._id,
+          username: user.email
         })
 
         user.profile = userProfile._id
@@ -45,6 +46,6 @@ passport.serializeUser((user, cb) => {
 })
 
 passport.deserializeUser(async (userId, cb) => {
-  // It's nice to be able to use await in-line!
-  cb(null, await User.findById(userId).populate('profile'))
+  const user = await User.findById(userId).populate('profile');
+  cb(null, user)
 })
