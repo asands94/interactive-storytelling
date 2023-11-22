@@ -1,0 +1,12 @@
+<%- include('../partials/header') %>
+
+<h2><%=story.title%></h2>
+<h3>Warning: <%=story.warning%></h3>
+<h3>Rating: <%=story.rating%></h3>
+<%-story.content%>
+<a href="/stories/edit/<%=story._id%>">Edit</a>
+
+<form action="/stories/<%=story._id%>?_method=DELETE" method="POST">
+  <button value="submit">Delete</button>
+</form>
+<%- include('../partials/footer') %>

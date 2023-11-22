@@ -1,0 +1,13 @@
+<%- include('../partials/header') %>
+
+<h2>All Stories</h2>
+
+<%stories.forEach((story) => { %>
+  <a href="/stories/<%=story._id%>">
+    <ul>
+      <li><%=story.title%></li>
+      <li><%=story.summary%></li>
+    </ul>
+  </a>
+<%}) %>
+<%- include('../partials/footer') %>

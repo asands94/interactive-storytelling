@@ -1,0 +1,40 @@
+<%- include('../partials/header') %>
+
+<h2>Start a New Story</h2>
+
+<form action="/stories" method="POST">
+  <label
+    >Rating
+    <select name="rating">
+      <option disabled selected>--SELECT RATING--</option>
+      <option value="General">General</option>
+      <option value="Teen">Teen</option>
+      <option value="Mature">Mature</option>
+      <option value="Explicit">Explicit</option>
+    </select>
+  </label>
+
+  <label
+    >Warning
+   <% warningOptions.forEach((warning) => { %>
+        <label>
+          <input type="checkbox" name="warning" value="<%=warning%>"/>
+          <%=warning%>
+        </label>
+   <% }) %>
+  </label>
+
+  <label> Summary </label>
+  <textarea name="summary"></textarea>
+
+  <label>
+    Title
+    <input type="text" name="title" />
+  </label>
+
+  <label> Story </label>
+  <textarea id="storytextarea" name="content"></textarea>
+  <button type="submit">Add Story</button>
+</form>
+
+<%- include('../partials/footer') %>
