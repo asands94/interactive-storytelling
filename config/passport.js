@@ -1,6 +1,7 @@
 const passport = require('passport')
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 const User = require('../models/user')
+const Profile = require('../models/profile')
 
 passport.use(
   new GoogleStrategy(
@@ -23,6 +24,14 @@ passport.use(
           email: profile.emails[0].value,
           avatar: profile.photos[0].value,
         })
+
+        const userProfile = await Profile.create({
+          user: user._id
+        })
+
+        user.profile = userProfile._id
+        await user.save()
+        
         return cb(null, user)
       } catch (err) {
         return cb(err)
@@ -37,5 +46,5 @@ passport.serializeUser((user, cb) => {
 
 passport.deserializeUser(async (userId, cb) => {
   // It's nice to be able to use await in-line!
-  cb(null, await User.findById(userId))
+  cb(null, await User.findById(userId).populate('profile'))
 })
