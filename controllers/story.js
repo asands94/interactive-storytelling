@@ -24,11 +24,12 @@ const newStory = (req, res) => {
 
 const show = async (req, res) => {
   try {
+
     const story = await Story.findById(req.params.id)
 
     res.render('stories/show', { story, apiKey: process.env.TINY_API })
   } catch (e) {
-    res.status(404).json({ error: e.message })
+    res.redirect('/stories')
   }
 }
 
