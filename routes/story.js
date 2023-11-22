@@ -12,6 +12,8 @@ router.get('/:id', storyCtrl.show)
 
 router.post('/', ensureLoggedIn, storyCtrl.create)
 
+router.get('/edit/:id', storyCtrl.editStory)
+
 router.put('/:id', ensureLoggedIn, storyCtrl.update)
 
 router.delete('/:id', ensureLoggedIn, storyCtrl.delete)

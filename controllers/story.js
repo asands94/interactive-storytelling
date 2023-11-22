@@ -10,7 +10,7 @@ const index = async (req, res) => {
   }
 }
 
-const newStory = async (req, res) => {
+const newStory = (req, res) => {
   try {
     const warningOptions = Object.values(
       Story.schema.path('warning').caster.enumValues
@@ -43,13 +43,33 @@ const create = async (req, res) => {
   }
 }
 
+const editStory = async (req, res) => {
+  try {
+    const warningOptions = Object.values(
+      Story.schema.path('warning').caster.enumValues
+    )
+    const story = await Story.findById(req.params.id)
+
+    selectedWarnings = story.warning
+   
+    res.render('stories/edit', {
+      story,
+      warningOptions,
+      selectedWarnings,
+      apiKey: process.env.TINY_API,
+    })
+  } catch (e) {
+    res.status(500).json({ error: e.message })
+  }
+}
+
 const update = async (req, res) => {
   try {
     const id = req.params.id
 
     const story = await Story.findByIdAndUpdate(id, req.body, { new: true })
 
-    res.send(story)
+    res.redirect(`/stories/${story._id}`)
   } catch (e) {
     res.status(424).json({ error: e.message })
   }
@@ -59,9 +79,9 @@ const deleteStory = async (req, res) => {
   try {
     const id = req.params.id
 
-    const story = await Story.findByIdAndDelete(id)
+    await Story.findByIdAndDelete(id)
 
-    res.send(story)
+    res.redirect(`/stories`)
   } catch (e) {
     res.status(404).json({ error: e.message })
   }
@@ -72,6 +92,7 @@ module.exports = {
   newStory,
   show,
   create,
+  editStory,
   update,
   delete: deleteStory,
 }
