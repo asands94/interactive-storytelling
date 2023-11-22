@@ -15,10 +15,12 @@
 
   <label
     >Warning
-    <select name="warning">
-      <option value="Violence">Extreme Violence</option>
-      <option value="Trauma">Trauma</option>
-    </select>
+   <% warningOptions.forEach((warning) => { %>
+        <label>
+          <input type="checkbox" name="warning" value="<%=warning%>"/>
+          <%=warning%>
+        </label>
+   <% }) %>
   </label>
 
   <label> Summary </label>

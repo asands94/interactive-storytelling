@@ -4,21 +4,27 @@ const index = async (req, res) => {
   try {
     const stories = await Story.find({})
 
-    res.render('stories/index', { stories, apiKey: process.env.TINY_API  })
+    res.render('stories/index', { stories, apiKey: process.env.TINY_API })
   } catch (e) {
     res.status(404).json({ error: e.message })
   }
 }
 
 const newStory = async (req, res) => {
-  res.render('stories/new', { apiKey: process.env.TINY_API })
+  try {
+    const warningOptions = Object.values(Story.schema.path('warning').enumValues)
+
+    res.render('stories/new', { warningOptions, apiKey: process.env.TINY_API })
+  } catch (e) {
+    res.status(404).json({ error: e.message })
+  }
 }
 
 const show = async (req, res) => {
   try {
     const story = await Story.findById(req.params.id)
 
-    res.render('stories/show', { story,apiKey: process.env.TINY_API  })
+    res.render('stories/show', { story, apiKey: process.env.TINY_API })
   } catch (e) {
     res.status(404).json({ error: e.message })
   }
