@@ -13,8 +13,9 @@ const reviewSchema = new Schema(
 )
 
 const storyWarnings = Object.freeze({
-  VIOLENCE: 'violence',
-  TRAUMA: 'trauma'
+  VIOLENCE: 'Violence',
+  TRAUMA: 'Trauma',
+  DRUG_USE: 'Drug Use'
 })
 
 const storySchema = new Schema(
@@ -25,10 +26,10 @@ const storySchema = new Schema(
     author: { type: Schema.Types.ObjectId, ref: 'Profile' },
     tags: { type: String, enum: ['none'] },
     warning: {
-      type: String,
+      type: [String],
       enum: Object.values(storyWarnings),
     },
-    rating: { type: String, enum: ['General', 'Teen', 'Mature', 'Explicit'] },
+    rating: { type: String, enum: ['General', 'Teen', 'Mature', 'Explicit'], default: 'Explicit' },
     summary: { type: String },
     reviews: [reviewSchema],
   },

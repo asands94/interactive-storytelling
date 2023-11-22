@@ -12,7 +12,9 @@ const index = async (req, res) => {
 
 const newStory = async (req, res) => {
   try {
-    const warningOptions = Object.values(Story.schema.path('warning').enumValues)
+    const warningOptions = Object.values(
+      Story.schema.path('warning').caster.enumValues
+    )
 
     res.render('stories/new', { warningOptions, apiKey: process.env.TINY_API })
   } catch (e) {
