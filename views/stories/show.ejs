@@ -4,9 +4,24 @@
 <h3>Warning: <%=story.warning%></h3>
 <h3>Rating: <%=story.rating%></h3>
 <%-story.content%>
+
+<select name="chapters">
+  <% story.chapters.forEach((chapter) => { %>
+  <option value="<%chapter.title%>"><%=chapter.title%></option>
+  <% }) %>
+</select>
+<button type="submit">Go</button>
+
+<% if(user) { %> 
+  if(user._id.toString() === story.author.toString()) { %>
 <a href="/stories/edit/<%=story._id%>">Edit</a>
 
 <form action="/stories/<%=story._id%>?_method=DELETE" method="POST">
   <button value="submit">Delete</button>
 </form>
+
+<a href="/stories/<%=story._id%>/chapter">New Chapter</a>
+  } 
+<%}%> 
+
 <%- include('../partials/footer') %>

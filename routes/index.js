@@ -2,10 +2,20 @@ const express = require('express')
 const router = express.Router()
 
 const passport = require('passport')
+const profileCtrl = require('../controllers/profile')
+const Profile = require('../models/profile')
 
 router.get('/', (req, res, next) => {
   res.render('index', {apiKey: process.env.TINY_API})
 })
+
+router.get('/profile/:id', async (req, res, next) => {
+  const profile = await Profile.findOne({ user: req.params.id })
+  console.log(profile)
+  res.render('profile', {profile, apiKey: process.env.TINY_API})
+})
+
+router.put('/profile/:id', profileCtrl.update)
 
 router.get(
   '/auth/google',

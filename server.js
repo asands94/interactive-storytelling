@@ -13,6 +13,7 @@ const PORT = process.env.PORT
 
 const indexRouter = require('./routes/index')
 const storyRouter = require('./routes/story')
+const chapterRouter = require('./routes/chapter')
 
 const app = express()
 
@@ -43,6 +44,7 @@ app.use(function (req, res, next) {
 
 app.use(indexRouter)
 app.use('/stories', storyRouter)
+app.use('/', chapterRouter)
 
 app.listen(PORT, () => {
   console.log(`Listening on port: ${PORT}`)

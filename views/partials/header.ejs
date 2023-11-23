@@ -27,36 +27,62 @@
     <title>Main App</title>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="/stories">Interactive Storytelling</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarText"
-          aria-controls="navbarText"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarText">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link" href="/stories/new">Write Story</a>
-            </li>
-          </ul>
-          <span class="nav-item">
-            <% if (user) {%>
-            <a class="nav-link" href="/logout">LOG OUT</a>
-            <%} else {%>
-            <a class="nav-link" href="/auth/google">LOG IN</a>
-            <%}%>
-          </span>
+    <header>
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/stories">Interactive Storytelling</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarText"
+            aria-controls="navbarText"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse d-flex" id="navbarText">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="/stories/new">change this</a>
+              </li>
+            </ul>
+            <span class="nav-item">
+              <% if (user) {%>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link" href="/stories/new">Write a Story</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/profile/<%=user._id%>">Profile</a>
+                  </li>
+                  <li>
+                    <a class="nav-link" href="/logout">LOG OUT</a>
+                  </li>
+                  <li class="nav-item">
+                    <form class="d-flex" role="search">
+                      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                      <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                  </li>
+                </ul>
+              <%} else {%>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link" href="/auth/google">LOG IN</a>
+                  </li>
+                  <li class="nav-item">
+                    <form class="d-flex" role="search">
+                      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                      <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                  </li>
+                </ul>
+              <%}%>
+            </span>
+          </div>
         </div>
-      </div>
-    </nav>
-    <main></main>
-  </body>
-</html>
+      </nav>
+    </header>
+    <main class="container-fluid">
