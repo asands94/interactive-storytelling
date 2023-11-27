@@ -22,6 +22,9 @@
     <script>
       tinymce.init({
         selector: '#storytextarea',
+        plugins: 'autosave',
+        menubar: 'file edit view',
+        toolbar: 'restoredraft undo redo | styles | hr blockquote | bold italic | alignleft aligncenter alignright alignjustify | outdent indent'
       })
     </script>
     <title>Main App</title>
@@ -29,8 +32,8 @@
   <body>
     <header>
       <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="/stories">Interactive Storytelling</a>
+        <div class="container">
+          <a class="navbar-brand" href="/">Interactive Storytelling</a>
           <button
             class="navbar-toggler"
             type="button"
@@ -40,49 +43,51 @@
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span class="navbar-toggler-icon"></span>
+            <i class="bi bi-book" style="font-size: 2rem;"></i>
           </button>
-          <div class="collapse navbar-collapse d-flex" id="navbarText">
+          <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link" href="/stories/new">change this</a>
+                <a class="nav-link" href="/stories">Explore</a>
+              </li>
+              <li class="nav-item">
+                <!-- <a class="nav-link" href="#">Community</a> -->
               </li>
             </ul>
             <span class="nav-item">
               <% if (user) {%>
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                    <a class="nav-link" href="/stories/new">Write a Story</a>
+                  <li class="nav-item dropdown order-lg-5">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Hi, <%=user.profile.username%></a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="/stories/new">Write a Story</a></li>
+                      <li><a class="dropdown-item" href="/profile/<%=user._id%>">Profile</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="/logout">Sign out</a></li>
+                    </ul>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="/profile/<%=user._id%>">Profile</a>
-                  </li>
-                  <li>
-                    <a class="nav-link" href="/logout">LOG OUT</a>
-                  </li>
-                  <li class="nav-item">
+                  <!-- <li class="nav-item">
                     <form class="d-flex" role="search">
                       <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                      <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
-                  </li>
+                  </li> -->
                 </ul>
               <%} else {%>
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                    <a class="nav-link" href="/auth/google">LOG IN</a>
-                  </li>
-                  <li class="nav-item">
+                  <li class="nav-item order-lg-5">
+                    <a class="nav-link" href="/auth/google">Sign in</a>
+                  </li>   
+                  <!-- <li class="nav-item">
                     <form class="d-flex" role="search">
                       <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                      <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
-                  </li>
+                  </li> -->
                 </ul>
               <%}%>
             </span>
           </div>
         </div>
       </nav>
+
     </header>
-    <main class="container-fluid">
+    <main class="container">

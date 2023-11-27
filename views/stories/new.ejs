@@ -2,7 +2,7 @@
 
 <h2>Start a New Story</h2>
 
-<form action="/stories" method="POST">
+<form action="/stories" method="POST" class="d-flex flex-column">
   <label
     >Rating
     <select name="rating">
@@ -32,7 +32,7 @@
     <input type="text" name="title" />
   </label>
 
-  <label> Story </label>
+  <!-- <label> Text Editor </label> -->
   <textarea id="storytextarea" name="content"></textarea>
   <button type="submit">Add Story</button>
 </form>
