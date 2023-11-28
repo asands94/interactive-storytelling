@@ -12,8 +12,38 @@
 <form action="/stories/<%=story._id%>?_method=DELETE" method="POST">
   <button value="submit">Delete</button>
 </form>
+  <%}%> 
+<%}%>
 
-<%}%> 
-<%}%> 
+<h4>Reviews</h4>
+<%if (user) { %>
+  <form action="/stories/<%=story._id%>/review" method="POST">
+
+    <label>Rating</label>
+  <select name="rating">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+  </select>
+  <label>Review</label>
+  <textarea name="content"></textarea>
+
+  <label>User</label>
+  <input name="user" value="<%=user._id%>"/>
+  <button value="submit">Add Review</button>
+  </form>
+<%}%>
+
+<%if (story.reviews.length > 0) {%>
+  <%story.reviews.forEach((review) => { %>
+    <p><%=review.rating%></p>
+    <p><%=review.content%></p>
+    <p><%=review.user%></p>
+  <% }) %>
+<% } else { %>
+  <p>This story has no reviews yet...</p>
+  <% }%>
 
 <%- include('../partials/footer') %>

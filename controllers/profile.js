@@ -1,4 +1,5 @@
 const Profile = require('../models/profile')
+const User = require('../models/user')
 
 const index = async (req, res) => {
   try {
@@ -13,11 +14,15 @@ const update = async (req, res) => {
   try {
     const userId = req.params.id
 
-    const profile = await Profile.findOne({ user: userId})
+    const user = await User.findById(userId)
+    
+    console.log(user)
 
-    profile.username = req.body.username
+    user.name = req.body.name
 
-    await profile.save()
+    await user.save()
+
+
 
     res.redirect(`/profile/${userId}`)
   } catch (e) {

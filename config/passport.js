@@ -24,14 +24,6 @@ passport.use(
           email: profile.emails[0].value,
           avatar: profile.photos[0].value,
         })
-
-        const userProfile = await Profile.create({
-          user: user._id,
-          username: user.email,
-        })
-
-        user.profile = userProfile._id
-        await user.save()
         
         return cb(null, user)
       } catch (err) {
@@ -46,6 +38,6 @@ passport.serializeUser((user, cb) => {
 })
 
 passport.deserializeUser(async (userId, cb) => {
-  const user = await User.findById(userId).populate('profile');
+  const user = await User.findById(userId)
   cb(null, user)
 })

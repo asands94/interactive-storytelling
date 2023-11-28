@@ -25,7 +25,9 @@ const newStory = (req, res) => {
 const show = async (req, res) => {
   try {
 
-    const story = await Story.findById(req.params.id)
+    const story = await Story.findById(req.params.id).populate('reviews.user')
+
+    console.log(story)
 
     res.render('stories/show', { story, apiKey: process.env.TINY_API })
   } catch (e) {
