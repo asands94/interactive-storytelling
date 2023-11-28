@@ -1,5 +1,7 @@
 const express = require('express')
+const path = require('path')
 const logger = require('morgan')
+const methodOverride = require('method-override')
 const session = require('express-session')
 const passport = require('passport')
 
@@ -10,13 +12,19 @@ require('./config/passport')
 const PORT = process.env.PORT
 
 const indexRouter = require('./routes/index')
-const exampleRouter = require('./routes/example')
+const storyRouter = require('./routes/story')
+const reviewRouter = require('./routes/review')
 
 const app = express()
 
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'ejs')
+
 app.use(logger('dev'))
+app.use(methodOverride('_method'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
+app.use(express.static(path.join(__dirname, 'public')))
 
 app.use(
   session({
@@ -35,7 +43,8 @@ app.use(function (req, res, next) {
 })
 
 app.use(indexRouter)
-app.use('/example', exampleRouter)
+app.use('/stories', storyRouter)
+app.use(reviewRouter)
 
 app.listen(PORT, () => {
   console.log(`Listening on port: ${PORT}`)
