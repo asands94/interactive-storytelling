@@ -10,7 +10,9 @@ router.get('/', async (req, res, next) => {
   try {
     const stories = await Story.find({})
 
-    res.render('simple-index', {stories, apiKey: process.env.TINY_API})
+    const limitedStories = stories.reverse().slice(0,3)
+
+    res.render('simple-index', {limitedStories, apiKey: process.env.TINY_API})
   } catch (e) {
     res.status(404).json({ error: e.message })
   }
