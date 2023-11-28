@@ -3,15 +3,15 @@ const User = require('../models/user')
 
 const update = async (req, res) => {
   try {
-    const user = await User.findById(req.params.id)
+    const userId = req.params.id
 
-    const profile = await Profile.findOne({ user: req.params.id })
+    const profile = await Profile.findOne({ user: userId})
 
     profile.username = req.body.username
 
     await profile.save()
 
-    res.redirect(`/profile/${user._id}`)
+    res.redirect(`/profile/${userId}`)
   } catch (e) {
     console.log({error: e.message})
   }
