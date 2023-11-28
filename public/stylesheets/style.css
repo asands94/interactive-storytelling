@@ -1,3 +1,5 @@
+/* SIMPLE-INDEX.EJS */
+
 .hero-section {
   display: flex;
   flex-direction: column;
@@ -58,4 +60,22 @@
 .read-cta {
   background: #EDAA3E;
   margin-top: auto
+}
+
+/* STORIES/NEW.EJS */
+.new-story-form {
+  display: flex;
+  flex-direction: column
+}
+
+select {
+  width:fit-content
+}
+
+textarea {
+  resize: none;
+}
+
+form > button {
+  width: fit-content
 }
