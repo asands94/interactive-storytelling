@@ -27,7 +27,7 @@ passport.use(
 
         const userProfile = await Profile.create({
           user: user._id,
-          username: user.email
+          username: user.email,
         })
 
         user.profile = userProfile._id
