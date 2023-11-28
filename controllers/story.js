@@ -51,10 +51,13 @@ const editStory = async (req, res) => {
     )
     const story = await Story.findById(req.params.id)
 
-    selectedWarnings = story.warning
+    const currentRating = story.rating
+
+    const selectedWarnings = story.warning
    
     res.render('stories/edit', {
       story,
+      currentRating,
       warningOptions,
       selectedWarnings,
       apiKey: process.env.TINY_API,

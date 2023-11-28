@@ -2,20 +2,18 @@
 
 <h2>Edit Your Story: <%=story.title%></h2>
 
-<form action="/stories/<%=story._id%>?_method=PUT" method="POST" >
-  <label
-    >Rating
-    <select name="rating">
-      <option disabled selected>--SELECT RATING--</option>
-      <option value="General">General</option>
-      <option value="Teen">Teen</option>
-      <option value="Mature">Mature</option>
-      <option value="Explicit">Explicit</option>
-    </select>
-  </label>
+<form action="/stories/<%=story._id%>?_method=PUT" method="POST" class="story-form">
 
-  <label
-    >Warning
+  <label><h4>Rating</h4></label>
+    <select name="rating">
+      <option disabled>--SELECT RATING--</option>
+      <option value="General" <%= currentRating === 'General' ? 'selected' : '' %>>General</option>
+      <option value="Teen" <%= currentRating === 'Teen' ? 'selected' : '' %>>Teen</option>
+      <option value="Mature" <%= currentRating === 'Mature' ? 'selected' : '' %>>Mature</option>
+      <option value="Explicit" <%= currentRating === 'Explicit' ? 'selected' : '' %>>Explicit</option>
+    </select>
+
+    <label><h4>Warning</h4></label>
    <% warningOptions.forEach((warning) => { %>
         <label>
           <input type="checkbox" name="warning" value="<%=warning%>"
@@ -26,17 +24,17 @@
          <%=warning%>
         </label>
    <% }) %>
-  </label>
 
-  <label> Summary </label>
+   <label><h4>Thumbnail</h4></label>
+    <input type="text" name="thumbnail" value="<%=story.thumbnail%>"/>
+
+    <label><h4>Summary</h4></label>
   <textarea name="summary"><%=story.summary%></textarea>
 
-  <label>
-    Title
+  <label><h4>Title</h4></label>
     <input type="text" name="title" value="<%=story.title%>"/>
-  </label>
 
-  <label> Story </label>
+    <label><h4>Text Editor</h4></label>
   <textarea id="storytextarea" name="content"><%=story.content%></textarea>
   <button type="submit">Update Story</button>
 </form>

@@ -4,14 +4,22 @@ const router = express.Router()
 const passport = require('passport')
 const profileCtrl = require('../controllers/profile')
 const Profile = require('../models/profile')
+const Story = require('../models/story')
 
-router.get('/', (req, res, next) => {
-  res.render('index', {apiKey: process.env.TINY_API})
+router.get('/', async (req, res, next) => {
+  try {
+    const stories = await Story.find({})
+
+    const limitedStories = stories.reverse().slice(0,3)
+
+    res.render('simple-index', {limitedStories, apiKey: process.env.TINY_API})
+  } catch (e) {
+    res.status(404).json({ error: e.message })
+  }
 })
 
 router.get('/profile/:id', async (req, res, next) => {
   const profile = await Profile.findOne({ user: req.params.id })
-  console.log(profile)
   res.render('profile', {profile, apiKey: process.env.TINY_API})
 })
 

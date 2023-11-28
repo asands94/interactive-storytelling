@@ -6,7 +6,9 @@ const update = async (req, res) => {
     const user = await User.findById(req.params.id)
 
     const profile = await Profile.findOne({ user: req.params.id })
+
     profile.username = req.body.username
+
     await profile.save()
 
     res.redirect(`/profile/${user._id}`)
