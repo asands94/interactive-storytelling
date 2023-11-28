@@ -63,7 +63,7 @@
 }
 
 /* STORIES/NEW.EJS */
-.new-story-form {
+.story-form {
   display: flex;
   flex-direction: column
 }

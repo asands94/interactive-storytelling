@@ -20,7 +20,6 @@ router.get('/', async (req, res, next) => {
 
 router.get('/profile/:id', async (req, res, next) => {
   const profile = await Profile.findOne({ user: req.params.id })
-  console.log(profile)
   res.render('profile', {profile, apiKey: process.env.TINY_API})
 })
 
