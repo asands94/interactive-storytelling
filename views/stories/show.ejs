@@ -30,17 +30,22 @@
   <label>Review</label>
   <textarea name="content"></textarea>
 
-  <label>User</label>
-  <input name="user" value="<%=user._id%>"/>
+  <input hidden name="user" value="<%=user._id%>"/>
   <button value="submit">Add Review</button>
   </form>
 <%}%>
 
 <%if (story.reviews.length > 0) {%>
+  
   <%story.reviews.forEach((review) => { %>
-    <p><%=review.rating%></p>
+    
+    <p>Rating: <%=review.rating%> | User: <%=review.user.name%></p>
     <p><%=review.content%></p>
-    <p><%=review.user%></p>
+    <% if(user && user._id.toString() === review.user._id.toString()) {%>
+      <form action="/review/<%=review._id%>?_method=DELETE" method="POST">
+        <button>Delete Review</button>
+      </form>
+    <%}%>
   <% }) %>
 <% } else { %>
   <p>This story has no reviews yet...</p>

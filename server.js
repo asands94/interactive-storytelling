@@ -44,7 +44,7 @@ app.use(function (req, res, next) {
 
 app.use(indexRouter)
 app.use('/stories', storyRouter)
-app.use('/', reviewRouter)
+app.use(reviewRouter)
 
 app.listen(PORT, () => {
   console.log(`Listening on port: ${PORT}`)
