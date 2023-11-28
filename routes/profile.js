@@ -7,5 +7,4 @@ router.get('/profile/:id', profileCtrl.index)
 
 router.put('/profile/:id', profileCtrl.update)
 
-
 module.exports = router
