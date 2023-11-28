@@ -5,13 +5,6 @@
 <h3>Rating: <%=story.rating%></h3>
 <%-story.content%>
 
-<!-- <select name="chapters">
-  <% story.chapters.forEach((chapter) => { %>
-  <option value="<%chapter.title%>"><%=chapter.title%></option>
-  <% }) %>
-</select>
-<button type="submit">Go</button> -->
-
 <% if(user) { %> 
   <% if(user._id.toString() === story.author.toString()) { %>
 <a href="/stories/edit/<%=story._id%>">Edit</a>
@@ -19,9 +12,45 @@
 <form action="/stories/<%=story._id%>?_method=DELETE" method="POST">
   <button value="submit">Delete</button>
 </form>
+  <%}%> 
+<%}%>
 
-<!-- <a href="/stories/<%=story._id%>/chapter">New Chapter</a> -->
-<%}%> 
-<%}%> 
+<h4>Reviews</h4>
+<%if (user) { %>
+  <form action="/stories/<%=story._id%>/review" method="POST" class="story-form">
+
+    <label>Rating</label>
+  <select name="rating">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+  </select>
+  <label>Review</label>
+  <textarea name="content"></textarea>
+
+  <input hidden name="user" value="<%=user._id%>"/>
+  <button value="submit">Add Review</button>
+  </form>
+<%}%>
+
+<%if (story.reviews.length > 0) {%>
+  
+  <%story.reviews.forEach((review) => { %>
+    
+    <p>Rating: <%=review.rating%> | User: <%=review.user.name%></p>
+    <p><%=review.content%></p>
+    <% if(user && user._id.toString() === review.user._id.toString()) {%>
+      <a href="/review/<%=review._id%>">Edit Review</a>
+
+      <form action="/review/<%=review._id%>?_method=DELETE" method="POST">
+        <button>Delete Review</button>
+      </form>
+    <%}%>
+  <% }) %>
+<% } else { %>
+  <p>This story has no reviews yet...</p>
+  <% }%>
 
 <%- include('../partials/footer') %>

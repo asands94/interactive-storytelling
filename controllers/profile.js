@@ -1,15 +1,28 @@
 const Profile = require('../models/profile')
 const User = require('../models/user')
 
+const index = async (req, res) => {
+  try {
+    const profile = await Profile.findOne({ user: req.params.id })
+    res.render('profile/index', {profile, apiKey: process.env.TINY_API})
+  } catch (e) {
+    console.log({error: e.message})
+  }
+}
+
 const update = async (req, res) => {
   try {
     const userId = req.params.id
 
-    const profile = await Profile.findOne({ user: userId})
+    const user = await User.findById(userId)
+    
+    console.log(user)
 
-    profile.username = req.body.username
+    user.name = req.body.name
 
-    await profile.save()
+    await user.save()
+
+
 
     res.redirect(`/profile/${userId}`)
   } catch (e) {
@@ -19,5 +32,6 @@ const update = async (req, res) => {
 }
 
 module.exports = {
+  index,
   update
 }

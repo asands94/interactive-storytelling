@@ -53,14 +53,13 @@
                 <a class="nav-link" href="/stories">Explore</a>
               </li>
               <li class="nav-item">
-                <!-- <a class="nav-link" href="#">Community</a> -->
               </li>
             </ul>
             <span class="nav-item">
               <% if (user) {%>
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item dropdown order-lg-5">
-                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Hi, <%=user.profile.username%></a>
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Hi, <%=user.name%></a>
                     <ul class="dropdown-menu">
                       <li><a class="dropdown-item" href="/stories/new">Write a Story</a></li>
                       <li><a class="dropdown-item" href="/profile/<%=user._id%>">Profile</a></li>
@@ -68,22 +67,12 @@
                       <li><a class="dropdown-item" href="/logout">Sign out</a></li>
                     </ul>
                   </li>
-                  <!-- <li class="nav-item">
-                    <form class="d-flex" role="search">
-                      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    </form>
-                  </li> -->
                 </ul>
               <%} else {%>
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item order-lg-5">
                     <a class="nav-link" href="/auth/google">Sign in</a>
                   </li>   
-                  <!-- <li class="nav-item">
-                    <form class="d-flex" role="search">
-                      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    </form>
-                  </li> -->
                 </ul>
               <%}%>
             </span>

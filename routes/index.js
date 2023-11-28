@@ -12,7 +12,7 @@ router.get('/', async (req, res, next) => {
 
     const limitedStories = stories.reverse().slice(0,3)
 
-    res.render('simple-index', {limitedStories, apiKey: process.env.TINY_API})
+    res.render('index', {limitedStories, apiKey: process.env.TINY_API})
   } catch (e) {
     res.status(404).json({ error: e.message })
   }
@@ -20,7 +20,7 @@ router.get('/', async (req, res, next) => {
 
 router.get('/profile/:id', async (req, res, next) => {
   const profile = await Profile.findOne({ user: req.params.id })
-  res.render('profile', {profile, apiKey: process.env.TINY_API})
+  res.render('profile/index', {profile, apiKey: process.env.TINY_API})
 })
 
 router.put('/profile/:id', profileCtrl.update)
