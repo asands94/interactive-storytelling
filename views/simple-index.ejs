@@ -8,7 +8,7 @@
 <section class="recent-stories">
   <h3>Recent Stories</h3>
   <div class="stories-container">
- <% stories.forEach((story) => { %>
+ <% limitedStories.forEach((story) => { %>
   <div class="stories-content">
   <% if(story.thumbnail) { %>
     <img src="<%=story.thumbnail%>" class="story-thumbnail" alt="<%=story.title%> cover" />
@@ -21,6 +21,8 @@
  <% }) %>
 </div>
 </section>
+
+
 
 
 
