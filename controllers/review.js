@@ -15,6 +15,22 @@ const create = async (req, res) => {
   }
 }
 
+const update = async (req, res) => {
+  try {
+
+    const story = await Story.findOne({ "reviews._id": req.params.id })
+
+    story.reviews.id(req.params.id).rating = req.body.rating
+    story.reviews.id(req.params.id).content = req.body.content
+    story.markModified('reviews')
+    await story.save()
+
+    res.redirect(`/stories/${story._id}`)
+  } catch (e) {
+    res.status(500).json({ error: e.message })
+  }
+}
+
 const deleteReview = async (req, res) => {
   try {
 
@@ -33,5 +49,6 @@ const deleteReview = async (req, res) => {
 
 module.exports = {
   create,
+  update,
   delete: deleteReview
 }
