@@ -1,5 +1,19 @@
 const Story = require('../models/story')
 
+const edit = async(req, res) => {
+  try {
+    const story = await Story.findOne({ "reviews._id": req.params.id })
+
+    const review = story.reviews.id(req.params.id)
+
+    const currentRating = review.rating
+
+    res.render('reviews/edit', {story, review, currentRating, apiKey: process.env.TINY_API })
+  } catch(e) {
+    res.status(404).json({ error: e.message })
+  }
+}
+
 const create = async (req, res) => {
   try {
 
@@ -48,7 +62,8 @@ const deleteReview = async (req, res) => {
 
 
 module.exports = {
+  edit,
   create,
   update,
-  delete: deleteReview
+  delete: deleteReview,
 }
