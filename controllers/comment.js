@@ -6,9 +6,8 @@ const edit = async(req, res) => {
 
     const comment = story.comments.id(req.params.id)
 
-    const currentRating = comment.rating
 
-    res.render('comments/edit', {story, comment, currentRating, apiKey: process.env.TINY_API })
+    res.render('comments/edit', {story, comment, apiKey: process.env.TINY_API })
   } catch(e) {
     res.status(404).json({ error: e.message })
   }
@@ -34,7 +33,6 @@ const update = async (req, res) => {
 
     const story = await Story.findOne({ "comments._id": req.params.id })
 
-    story.comments.id(req.params.id).rating = req.body.rating
     story.comments.id(req.params.id).content = req.body.content
     story.markModified('comments')
     await story.save()

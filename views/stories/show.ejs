@@ -1,10 +1,15 @@
 <%- include('../partials/header') %>
 
+<section class="story-info">
+  <h4>Warning(s): <%= story.warning.length > 0 ? story.warning : 'None' %></h4>
+  <h4>Rating: <%=story.rating%></h4>  
+</section>
 
-<h4>Warning(s): <%= story.warning.length > 0 ? story.warning : 'None' %></h4>
-<h4>Rating: <%=story.rating%></h4>
-<h4><%=story.title%></h4>
-<%-story.content%>
+<section class="story-start">
+  <h4><%=story.title%></h4>
+  <%-story.content%>
+</section>
+
 
 <% if(user) { %> 
   <% if(user._id.toString() === story.author.toString()) { %>
@@ -21,14 +26,6 @@
   <%if (user) { %>
     <form action="/stories/<%=story._id%>/comment" method="POST" class="story-form">
   
-      <!-- <label>Rating</label>
-    <select name="rating">
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-    </select> -->
     <label>Comment</label>
     <textarea name="content"></textarea>
   
@@ -41,7 +38,6 @@
     
     <%story.comments.forEach((comment) => { %>
       
-      <!-- <p>Rating: <%=comment.rating%> | User: <%=comment.user.name%></p> -->
       <section class="created-comments">
       <p class="comment-user-info"><%=comment.user.name %> | <%=comment.createdAt.toDateString('en-us', {weekday:"short", year:"numeric", month:"short"})%></p>
       <p><%=comment.content%></p>
