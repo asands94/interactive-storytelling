@@ -2,6 +2,16 @@ const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema
 
+const pollSchema = new Schema(
+  {
+    question: { type: String },
+    options: [String]
+  },
+  {
+    timestamps: true,
+  }
+)
+
 const commentSchema = new Schema(
   {
     content: { type: String },
@@ -32,6 +42,7 @@ const storySchema = new Schema(
     rating: { type: String, enum: ['General', 'Teen', 'Mature', 'Explicit'], default: 'Explicit' },
     summary: { type: String },
     comments: [commentSchema],
+    polls: [pollSchema]
   },
   {
     timestamps: true,
