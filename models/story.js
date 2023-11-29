@@ -33,7 +33,7 @@ const storySchema = new Schema(
     thumbnail: {type: String},
     title: { type: String, required: true },
     content: { type: String, required: true },
-    author: { type: Schema.Types.ObjectId, ref: 'Profile' },
+    author: { type: Schema.Types.ObjectId, ref: 'User' },
     tags: { type: String, enum: ['none'] },
     warning: {
       type: [String],

@@ -11,6 +11,7 @@ const userSchema = new Schema(
     },
     email: String,
     avatar: String,
+    stories: [{ type: Schema.Types.ObjectId, ref: 'Story'}]
   },
   {
     timestamps: true,

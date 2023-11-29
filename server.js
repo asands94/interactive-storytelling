@@ -12,6 +12,7 @@ require('./config/passport')
 const PORT = process.env.PORT
 
 const indexRouter = require('./routes/index')
+const profileRouter = require('./routes/profile')
 const storyRouter = require('./routes/story')
 const commentRouter = require('./routes/comment')
 const pollRouter = require('./routes/poll')
@@ -44,6 +45,7 @@ app.use(function (req, res, next) {
 })
 
 app.use(indexRouter)
+app.use(profileRouter)
 app.use('/stories', storyRouter)
 app.use(commentRouter)
 app.use(pollRouter)
