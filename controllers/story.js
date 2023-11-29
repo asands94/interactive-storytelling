@@ -1,4 +1,5 @@
 const Story = require('../models/story')
+const User = require('../models/user')
 
 const index = async (req, res) => {
   try {
@@ -38,6 +39,12 @@ const create = async (req, res) => {
     req.body.author = req.user
     const story = await Story.create(req.body)
 
+    const user = await User.findById(req.user._id)
+
+    user.stories.push(story)
+
+    await user.save()
+    
     res.redirect(`/stories/${story._id}`)
   } catch (e) {
     res.status(500).json({ error: e.message })

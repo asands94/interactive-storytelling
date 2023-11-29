@@ -7,5 +7,10 @@
   <button type="submit">Submit</button>
 </form>
 
+<%user.stories.forEach((story) => {%>
+  <p><%=story.title%></p>
+  <a href="/<%=story._id%>/poll">Add Poll</a>
+<%})%>
+
 
 <%- include('../partials/footer') %>

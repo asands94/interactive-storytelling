@@ -1,4 +1,15 @@
+const { render } = require('ejs')
 const Story = require('../models/story')
+
+const newPoll = async (req, res) => {
+  try {
+    const story = await Story.findById(req.params.id)
+    
+    res.render('polls/new', {story, apiKey: process.env.TINY_API })
+  } catch (e) {
+    
+  }
+}
 
 const create = async (req, res) => {
   try {
@@ -16,5 +27,6 @@ const create = async (req, res) => {
 }
 
 module.exports = {
+  new: newPoll,
   create
 }

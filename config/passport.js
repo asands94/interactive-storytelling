@@ -37,6 +37,6 @@ passport.serializeUser((user, cb) => {
 })
 
 passport.deserializeUser(async (userId, cb) => {
-  const user = await User.findById(userId)
+  const user = await User.findById(userId).populate('stories')
   cb(null, user)
 })
