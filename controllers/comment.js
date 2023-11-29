@@ -2,13 +2,13 @@ const Story = require('../models/story')
 
 const edit = async(req, res) => {
   try {
-    const story = await Story.findOne({ "reviews._id": req.params.id })
+    const story = await Story.findOne({ "comments._id": req.params.id })
 
-    const review = story.reviews.id(req.params.id)
+    const comment = story.comments.id(req.params.id)
 
-    const currentRating = review.rating
+    const currentRating = comment.rating
 
-    res.render('reviews/edit', {story, review, currentRating, apiKey: process.env.TINY_API })
+    res.render('comments/edit', {story, comment, currentRating, apiKey: process.env.TINY_API })
   } catch(e) {
     res.status(404).json({ error: e.message })
   }
@@ -19,7 +19,7 @@ const create = async (req, res) => {
 
     const story = await Story.findById(req.params.id)
 
-    story.reviews.push(req.body)
+    story.comments.push(req.body)
 
     await story.save()
   
@@ -32,11 +32,11 @@ const create = async (req, res) => {
 const update = async (req, res) => {
   try {
 
-    const story = await Story.findOne({ "reviews._id": req.params.id })
+    const story = await Story.findOne({ "comments._id": req.params.id })
 
-    story.reviews.id(req.params.id).rating = req.body.rating
-    story.reviews.id(req.params.id).content = req.body.content
-    story.markModified('reviews')
+    story.comments.id(req.params.id).rating = req.body.rating
+    story.comments.id(req.params.id).content = req.body.content
+    story.markModified('comments')
     await story.save()
 
     res.redirect(`/stories/${story._id}`)
@@ -45,12 +45,12 @@ const update = async (req, res) => {
   }
 }
 
-const deleteReview = async (req, res) => {
+const deleteComment = async (req, res) => {
   try {
 
-    const story = await Story.findOne({ "reviews._id": req.params.id })
+    const story = await Story.findOne({ "comments._id": req.params.id })
     
-    story.reviews.remove(req.params.id)
+    story.comments.remove(req.params.id)
 
     story.save()
 
@@ -65,5 +65,5 @@ module.exports = {
   edit,
   create,
   update,
-  delete: deleteReview,
+  delete: deleteComment,
 }

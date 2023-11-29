@@ -1,19 +1,19 @@
 <%- include('../partials/header') %>
 
-<h2>Edit Your Review</h2>
+<h2>Edit Your Comment</h2>
 
-<form action="/review/<%=review._id%>?_method=PUT" method="POST" class="story-form">
-  <label>Rating</label>
+<form action="/comment/<%=comment._id%>?_method=PUT" method="POST" class="story-form">
+  <!-- <label>Rating</label>
   <select name="rating">
     <option value="1" <%= currentRating == '1' ? 'selected' : '' %>>1</option>
     <option value="2" <%= currentRating == '2' ? 'selected' : '' %>>2</option>
     <option value="3" <%= currentRating == '3' ? 'selected' : '' %>>3</option>
     <option value="4" <%= currentRating == '4' ? 'selected' : '' %>>4</option>
     <option value="5" <%= currentRating == '5' ? 'selected' : '' %>>5</option>
-  </select>
+  </select> -->
   
-  <label>Review</label>
-  <textarea name="content"><%=review.content%></textarea>
+  <label>Comment</label>
+  <textarea name="content"><%=comment.content%></textarea>
   <button>Submit</button>
 </form>
 <a href="/stories/<%=story._id%>">Go back</a>

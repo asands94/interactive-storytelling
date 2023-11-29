@@ -1,8 +1,9 @@
 <%- include('../partials/header') %>
 
-<h2><%=story.title%></h2>
-<h3>Warning: <%=story.warning%></h3>
-<h3>Rating: <%=story.rating%></h3>
+
+<h4>Warning(s): <%= story.warning.length > 0 ? story.warning : 'None' %></h4>
+<h4>Rating: <%=story.rating%></h4>
+<h4><%=story.title%></h4>
 <%-story.content%>
 
 <% if(user) { %> 
@@ -15,42 +16,48 @@
   <%}%> 
 <%}%>
 
-<h4>Reviews</h4>
-<%if (user) { %>
-  <form action="/stories/<%=story._id%>/review" method="POST" class="story-form">
-
-    <label>Rating</label>
-  <select name="rating">
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-  </select>
-  <label>Review</label>
-  <textarea name="content"></textarea>
-
-  <input hidden name="user" value="<%=user._id%>"/>
-  <button value="submit">Add Review</button>
-  </form>
-<%}%>
-
-<%if (story.reviews.length > 0) {%>
+<section class="comments-section">
+  <h4>Comments</h4>
+  <%if (user) { %>
+    <form action="/stories/<%=story._id%>/comment" method="POST" class="story-form">
   
-  <%story.reviews.forEach((review) => { %>
+      <!-- <label>Rating</label>
+    <select name="rating">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+    </select> -->
+    <label>Comment</label>
+    <textarea name="content"></textarea>
+  
+    <input hidden name="user" value="<%=user._id%>"/>
+    <button value="submit">Add Comment</button>
+    </form>
+  <%}%>
+  
+  <%if (story.comments.length > 0) {%>
     
-    <p>Rating: <%=review.rating%> | User: <%=review.user.name%></p>
-    <p><%=review.content%></p>
-    <% if(user && user._id.toString() === review.user._id.toString()) {%>
-      <a href="/review/<%=review._id%>">Edit Review</a>
+    <%story.comments.forEach((comment) => { %>
+      
+      <!-- <p>Rating: <%=comment.rating%> | User: <%=comment.user.name%></p> -->
+      <section class="created-comments">
+      <p class="comment-user-info"><%=comment.user.name %> | <%=comment.createdAt.toDateString('en-us', {weekday:"short", year:"numeric", month:"short"})%></p>
+      <p><%=comment.content%></p>
+      <% if(user && user._id.toString() === comment.user._id.toString()) {%>
+        <a href="/comment/<%=comment._id%>">Edit Comment</a>
+  
+        <form action="/comment/<%=comment._id%>?_method=DELETE" method="POST">
+          <button>Delete Comment</button>
+        </form>
+      </section>
+      <%}%>
+    <% }) %>
+  <% } else { %>
+    <p>This story has no comments yet...</p>
+    <% }%>
+</section>
 
-      <form action="/review/<%=review._id%>?_method=DELETE" method="POST">
-        <button>Delete Review</button>
-      </form>
-    <%}%>
-  <% }) %>
-<% } else { %>
-  <p>This story has no reviews yet...</p>
-  <% }%>
 
 <%- include('../partials/footer') %>
