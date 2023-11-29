@@ -63,6 +63,7 @@
 }
 
 /* STORIES/NEW.EJS */
+
 .story-form {
   display: flex;
   flex-direction: column
@@ -78,4 +79,42 @@ textarea {
 
 form > button {
   width: fit-content
+}
+
+/* STORIES/SHOW.EJS */
+
+.story-start {
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.comments-section {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10vh;
+}
+
+.comments-section > form > button {
+  align-self: flex-end;
+}
+
+.comments-section > h4 {
+  text-align: center;
+  margin-top: 5vh;
+}
+
+.created-comments {
+  border: solid rgb(227, 227, 227) 1px;
+  margin-top: 5vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.created-comments > a, .created-comments > form {
+  align-self: flex-end;
+}
+
+.comment-user-info {
+  background: rgb(227, 227, 227);
 }

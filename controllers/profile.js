@@ -14,16 +14,8 @@ const update = async (req, res) => {
   try {
     const userId = req.params.id
 
-    const user = await User.findById(userId)
+    await User.findByIdAndUpdate(userId, req.body, {new: true})
     
-    console.log(user)
-
-    user.name = req.body.name
-
-    await user.save()
-
-
-
     res.redirect(`/profile/${userId}`)
   } catch (e) {
     console.log({error: e.message})

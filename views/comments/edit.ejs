@@ -1,0 +1,12 @@
+<%- include('../partials/header') %>
+
+<h2>Edit Your Comment</h2>
+
+<form action="/comment/<%=comment._id%>?_method=PUT" method="POST" class="story-form">
+  <label>Comment</label>
+  <textarea name="content"><%=comment.content%></textarea>
+  <button>Submit</button>
+</form>
+<a href="/stories/<%=story._id%>">Go back</a>
+
+<%- include('../partials/footer') %>
