@@ -4,9 +4,9 @@ const Schema = mongoose.Schema
 
 const pollSchema = new Schema(
   {
-    question: { type: String },
+    question: { type: String, required: true },
     options: [String],
-    votes: [{ user: { type: Schema.Types.ObjectId, ref: 'User' }, selectedOption: { type: String } }]
+    votes: [{ user: { type: Schema.Types.ObjectId, ref: 'User', unique: true }, selectedOption: { type: String } }]
   },
   {
     timestamps: true,
