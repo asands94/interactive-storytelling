@@ -22,11 +22,17 @@
 <%}%>
 
 <%story.polls.forEach((poll) => { %>
-  <p><%=poll.question%></p>
-  <%poll.options.forEach((option) => { %>
-    <input type="radio" id="<%=option%>" name="options"/>
-    <label for="<%=option%>"><%=option%></label>
-   <%})%>
+  <form action="/stories/<%=story._id%>/polls/<%=poll._id%>/vote" method="POST">
+    <p><%=poll.question%></p>
+    <%poll.options.forEach((option) => { %>
+      <label for="<%=option%>">
+      <input type="radio" id="<%=option%>" name="selectedOption" value="<%=option%>"/>
+      <%=option%>
+    </label>
+     <%})%>
+     <button>Vote</button>
+  </form>
+  
 <%})%>
 
 <section class="comments-section">
