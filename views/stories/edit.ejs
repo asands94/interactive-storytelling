@@ -4,8 +4,8 @@
 
 <form action="/stories/<%=story._id%>?_method=PUT" method="POST" class="story-form">
 
-  <label><h4>Rating</h4></label>
-    <select name="rating">
+  <label for="edit-rating"><h4>Rating</h4></label>
+    <select id="edit-rating" name="rating">
       <option disabled>--SELECT RATING--</option>
       <option value="General" <%= currentRating === 'General' ? 'selected' : '' %>>General</option>
       <option value="Teen" <%= currentRating === 'Teen' ? 'selected' : '' %>>Teen</option>
@@ -13,10 +13,10 @@
       <option value="Explicit" <%= currentRating === 'Explicit' ? 'selected' : '' %>>Explicit</option>
     </select>
 
-    <label><h4>Warning</h4></label>
+    <label for="edit-story-warning"><h4>Warning</h4></label>
    <% warningOptions.forEach((warning) => { %>
-        <label>
-          <input type="checkbox" name="warning" value="<%=warning%>"
+        <label for="edit-<%=warning%>">
+          <input id="edit-<%=warning%>" type="checkbox" name="warning" value="<%=warning%>"
           <%if (selectedWarnings && selectedWarnings.includes(warning)) { %>
               checked
          <% } %>
@@ -25,16 +25,16 @@
         </label>
    <% }) %>
 
-   <label><h4>Thumbnail</h4></label>
-    <input type="text" name="thumbnail" value="<%=story.thumbnail%>"/>
+   <label for="edit-thumbnail"><h4>Thumbnail</h4></label>
+    <input id="thumbnail" type="text" name="thumbnail" value="<%=story.thumbnail%>"/>
 
-    <label><h4>Summary</h4></label>
-  <textarea name="summary"><%=story.summary%></textarea>
+    <label for="edit-summary"><h4>Summary</h4></label>
+  <textarea id="edit-summary" name="summary"><%=story.summary%></textarea>
 
-  <label><h4>Title</h4></label>
-    <input type="text" name="title" value="<%=story.title%>"/>
+  <label for="edit-title"><h4>Title</h4></label>
+    <input id="edit-title" type="text" name="title" value="<%=story.title%>"/>
 
-    <label><h4>Text Editor</h4></label>
+    <label for="storytextarea"><h4>Text Editor</h4></label>
   <textarea id="storytextarea" name="content"><%=story.content%></textarea>
   <button type="submit">Update Story</button>
 </form>
