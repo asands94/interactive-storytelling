@@ -2,8 +2,6 @@ const express = require('express')
 const router = express.Router()
 
 const passport = require('passport')
-const profileCtrl = require('../controllers/profile')
-const Profile = require('../models/profile')
 const Story = require('../models/story')
 
 router.get('/', async (req, res, next) => {
@@ -17,13 +15,6 @@ router.get('/', async (req, res, next) => {
     res.status(404).json({ error: e.message })
   }
 })
-
-router.get('/profile/:id', async (req, res, next) => {
-  const profile = await Profile.findOne({ user: req.params.id })
-  res.render('profile/index', {profile, apiKey: process.env.TINY_API})
-})
-
-router.put('/profile/:id', profileCtrl.update)
 
 router.get(
   '/auth/google',

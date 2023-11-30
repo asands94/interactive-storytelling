@@ -4,8 +4,8 @@
 
 <form action="/stories" method="POST" class="story-form">
 
-  <label><h4>Rating</h4></label>
-    <select name="rating">
+  <label for="new-rating"><h4>Rating</h4></label>
+    <select id="new-rating" name="rating">
       <option disabled selected>--SELECT RATING--</option>
       <option value="General">General</option>
       <option value="Teen">Teen</option>
@@ -14,27 +14,27 @@
     </select>
  
 
-  <label><h4>Warning</h4></label>
+  <label for="new-warning"><h4>Warning</h4></label>
    <% warningOptions.forEach((warning) => { %>
-        <label>
-          <input type="checkbox" name="warning" value="<%=warning%>"/>
+        <label for="new-<%=warning%>">
+          <input id="new-<%=warning%>" type="checkbox" name="warning" value="<%=warning%>"/>
           <%=warning%>
         </label>
    <% }) %>
   
 
-  <label><h4>Thumbnail</h4></label>
-    <input type="text" name="thumbnail" placeholder="Input a URL"/>
+  <label for="new-thumbail"><h4>Thumbnail</h4></label>
+    <input id="new-thumbnail" type="text" name="thumbnail" placeholder="Input a URL"/>
   
 
-  <label><h4>Summary</h4></label>
-  <textarea name="summary"></textarea>
+  <label for="new-summary"><h4>Summary</h4></label>
+  <textarea id="new-summary" name="summary"></textarea>
 
-  <label><h4>Title</h4></label>
-    <input type="text" name="title" />
+  <label for="new-title"><h4>Title</h4></label>
+    <input id="new-title" type="text" name="title" />
   
 
-  <label><h4>Text Editor</h4></label>
+  <label for="storytextarea"><h4>Text Editor</h4></label>
   <textarea id="storytextarea" name="content"></textarea>
   <button type="submit">Add Story</button>
 </form>

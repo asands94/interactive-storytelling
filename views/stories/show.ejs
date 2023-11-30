@@ -21,13 +21,27 @@
   <%}%> 
 <%}%>
 
+<%story.polls.forEach((poll) => { %>
+  <form action="/stories/<%=story._id%>/polls/<%=poll._id%>/vote" method="POST">
+    <p><%=poll.question%></p>
+    <%poll.options.forEach((option) => { %>
+      <label for="<%=option%>">
+      <input type="radio" id="<%=option%>" name="selectedOption" value="<%=option%>"/>
+      <%=option%>
+    </label>
+     <%})%>
+     <button>Vote</button>
+  </form>
+  
+<%})%>
+
 <section class="comments-section">
   <h4>Comments</h4>
   <%if (user) { %>
     <form action="/stories/<%=story._id%>/comment" method="POST" class="story-form">
   
-    <label>Comment</label>
-    <textarea name="content"></textarea>
+    <label for="new-comment">Comment</label>
+    <textarea id="new-comment" name="content"></textarea>
   
     <input hidden name="user" value="<%=user._id%>"/>
     <button value="submit">Add Comment</button>
@@ -57,3 +71,5 @@
 
 
 <%- include('../partials/footer') %>
+
+

@@ -1,0 +1,42 @@
+<%- include('../partials/header') %>
+
+
+<form action="/stories/<%=story._id%>/polls" method="POST">
+  <label for="question">Question</label>
+  <input id="question" placeholder="Question" name="question" />
+
+  <div id="optionContainer">
+    <label>Options</label>
+    <input type="text" placeholder="option" name="options" />
+  </div>
+
+  <button type="button" onclick="addOptionInput()">Add Option</button>
+  <button type="submit">Submit</button>
+</form>
+
+
+<%- include('../partials/footer') %>
+
+<script>
+  function addOptionInput() {
+    const optionContainer = document.getElementById('optionContainer');
+    
+    // Create a new input element
+    const newInput = document.createElement('input');
+    newInput.type = 'text';
+    newInput.placeholder = 'option';
+    newInput.name = 'options';
+
+    const deleteOption = document.createElement('input')
+    deleteOption.type = 'button'
+    deleteOption.value = 'Remove Option'
+    deleteOption.onclick = function() {
+      optionContainer.removeChild(newInput)
+      optionContainer.removeChild(deleteOption)
+    }
+
+    // Append the new input to the container
+    optionContainer.appendChild(newInput);
+    optionContainer.appendChild(deleteOption);
+  }
+</script>

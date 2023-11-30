@@ -2,10 +2,15 @@
 
 <h2>Profile Page</h2>
 <form action="/profile/<%=user._id%>?_method=PUT" method="POST">
-<label> Username
-  <input type="text" name="name" value="<%=user.name%>"/>
-</label>
+<label for="username"> Username</label>
+  <input id="username" type="text" name="name" value="<%=user.name%>"/>
   <button type="submit">Submit</button>
 </form>
+
+<%user.stories.forEach((story) => {%>
+  <p><%=story.title%></p>
+  <a href="/<%=story._id%>/poll">Add Poll</a>
+<%})%>
+
 
 <%- include('../partials/footer') %>
