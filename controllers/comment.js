@@ -18,6 +18,8 @@ const create = async (req, res) => {
 
     const story = await Story.findById(req.params.id)
 
+    req.body.user = req.user
+
     story.comments.push(req.body)
 
     await story.save()

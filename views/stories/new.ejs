@@ -2,7 +2,7 @@
 
 <h2>Start a New Story</h2>
 
-<form action="/stories" method="POST" class="story-form">
+<form action="/stories" method="POST" class="story-form" enctype="multipart/form-data">
 
   <label for="new-rating"><h4>Rating</h4></label>
     <select id="new-rating" name="rating">
@@ -23,8 +23,21 @@
    <% }) %>
   
 
-  <label for="new-thumbail"><h4>Thumbnail</h4></label>
-    <input id="new-thumbnail" type="text" name="thumbnail" placeholder="Input a URL"/>
+  <!-- <label for="new-thumbail"><h4>Thumbnail</h4></label>
+    <input id="new-thumbnail" type="text" name="thumbnail" placeholder="Input a URL"/> -->
+
+    <label>
+      Image Upload
+      <input type="file" name="imageUpload" required/>
+  </label>
+  <label>
+      Image Description
+      <input type="text" name="description" />
+  </label>
+  <label>
+      Image Alt Text
+      <input type="text" name="alt" />
+  </label>
   
 
   <label for="new-summary"><h4>Summary</h4></label>

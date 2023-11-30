@@ -23,6 +23,17 @@ const commentSchema = new Schema(
   }
 )
 
+const thumbnailSchema = new Schema(
+  {
+    url: { type: String, required: true },
+    description: { type: String },
+    alt: {type: String, default: "story cover"}
+  }, 
+  {
+    timestamps: true
+  }
+)
+
 const storyWarnings = Object.freeze({
   VIOLENCE: 'Violence',
   TRAUMA: 'Trauma',
@@ -31,7 +42,7 @@ const storyWarnings = Object.freeze({
 
 const storySchema = new Schema(
   {
-    thumbnail: {type: String},
+    thumbnail: thumbnailSchema,
     title: { type: String, required: true },
     content: { type: String, required: true },
     author: { type: Schema.Types.ObjectId, ref: 'User' },
