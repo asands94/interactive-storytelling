@@ -9,7 +9,7 @@ cloudinary.config(clConfig);
 
 const index = async (req, res) => {
   try {
-    const stories = await Story.find({})
+    const stories = await Story.find({}).populate('author')
 
     res.render('stories/index', { stories, apiKey: process.env.TINY_API })
   } catch (e) {

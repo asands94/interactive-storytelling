@@ -1,8 +1,13 @@
 <%- include('./partials/header') %>
 
 <section class="hero-section">
-  <img src="stylesheets/simple-hero.png" alt="" class="hero-image"/>
-  <a href="/auth/google" class="join-cta">Join Now</a>
+  <img src="stylesheets/simple-hero.png" alt="hero image" class="hero-image"/>
+  <% if(user) { %>
+    <a href="/stories" class="main-cta">Browse Stories</a>
+  <% } else { %>
+    <a href="/auth/google" class="main-cta">Join Now</a>
+  <% } %>
+  
 </section>
 
 <section class="recent-stories">
@@ -20,6 +25,7 @@
   </div>
  <% }) %>
 </div>
+<a href="/stories">Browse more stories ⟶</a>
 </section>
 
 

@@ -13,7 +13,7 @@
 
 <% if(user) { %> 
   <% if(user._id.toString() === story.author.toString()) { %>
-<a href="/stories/edit/<%=story._id%>">Edit</a>
+<a href="/stories/<%=story._id%>/edit">Edit</a>
 
 <form action="/stories/<%=story._id%>?_method=DELETE" method="POST">
   <button value="submit">Delete</button>

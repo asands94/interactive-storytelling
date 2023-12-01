@@ -1,3 +1,4 @@
+const createError = require('http-errors')
 const express = require('express')
 const path = require('path')
 const logger = require('morgan')
@@ -39,7 +40,7 @@ app.use(
 app.use(passport.initialize())
 app.use(passport.session())
 
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
   res.locals.user = req.user
   next()
 })
@@ -49,6 +50,19 @@ app.use(profileRouter)
 app.use('/stories', storyRouter)
 app.use(commentRouter)
 app.use(pollRouter)
+
+app.use((req, res, next) => {
+  next(createError(404))
+})
+
+app.use((err, req, res, next) => {
+  res.locals.message = err.message
+  res.locals.error = req.app.get('env') === 'development' ? err : {}
+
+  res.status(err.status || 500)
+  res.render('error', {apiKey: process.env.TINY_API} )
+})
+
 
 app.listen(PORT, () => {
   console.log(`Listening on port: ${PORT}`)

@@ -1,0 +1,29 @@
+<%stories.forEach((story) => {%>
+  <section class="users-stories">
+    <div class="stories-top">
+      <div>
+      <a href="/stories/<%=story._id%>"><%=story.title%></a> by <%=story.author.name%>
+    </div>
+      <p>
+        <%=story.createdAt.toDateString('en-us', {weekday:"short", year:"numeric",
+        month:"short"})%>
+      </p>
+    </div>
+  
+    <p><%=story.summary%></p>
+    <div class="admin">
+      <div class="buttons">
+        <% if (user) { %>
+          <%  if(user._id.toString() === story.author._id.toString()) { %>
+            <a href="/stories/<%=story._id%>/edit">Edit</a>
+            <a href="/<%=story._id%>/poll">Add Poll</a>
+        <%  } %>
+       <% } %>
+    
+        
+      </div>
+      <p>Comments: <%=story.comments.length%></p>
+    </div>
+  </section>
+  
+  <%})%>

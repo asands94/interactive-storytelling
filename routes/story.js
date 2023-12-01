@@ -14,7 +14,7 @@ router.get('/:id', storyCtrl.show)
 
 router.post('/', ensureLoggedIn, upload.single("imageUpload"), storyCtrl.create)
 
-router.get('/edit/:id', ensureLoggedIn, storyCtrl.editStory)
+router.get('/:id/edit', ensureLoggedIn, storyCtrl.editStory)
 
 router.put('/:id', ensureLoggedIn, upload.single("imageUpload"), storyCtrl.update)
 
