@@ -1,3 +1,9 @@
+/* RESET */
+
+p{
+  margin: 0
+}
+
 main {
   min-height: 100vh
 }
@@ -129,4 +135,31 @@ form > button {
 
 .comment-user-info {
   background: rgb(227, 227, 227);
+}
+
+/* PROFILE/INDEX.EJS */
+.users-stories {
+  border: solid rgb(227, 227, 227) 1px;
+  margin-top: 2vh;
+  display: flex;
+  flex-direction: column;
+  padding: 10px
+}
+
+.users-stories > p {
+  margin: 15px 0
+}
+
+.stories-top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.buttons {
+  height: fit-content
+}
+
+.admin {
+  display: flex;
+  justify-content: space-between;
 }

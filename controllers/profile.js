@@ -1,9 +1,10 @@
 const User = require('../models/user')
+const Story = require('../models/story')
 
 const index = async (req, res) => {
   try {
-    // const profile = await User.findById(req.params.id)
-    res.render('profile/index', {apiKey: process.env.TINY_API})
+    const stories = await Story.find({ author: req.params.id }).populate('author')
+    res.render('profile/index', {stories, apiKey: process.env.TINY_API})
   } catch (e) {
     console.log({error: e.message})
   }
