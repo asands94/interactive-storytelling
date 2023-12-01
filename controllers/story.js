@@ -115,7 +115,13 @@ const deleteStory = async (req, res) => {
   try {
     const id = req.params.id
 
-    await Story.findByIdAndDelete(id)
+    const story = await Story.findByIdAndDelete(id)
+
+    req.user.stories = req.user.stories.filter((storyId) => {
+      storyId._id.toString() !== story._id.toString()
+    })
+
+    req.user.save()
 
     res.redirect(`/stories`)
   } catch (e) {
