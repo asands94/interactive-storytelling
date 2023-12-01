@@ -68,7 +68,7 @@
     <%story.comments.forEach((comment) => { %>
       
       <section class="created-comments">
-      <p class="comment-user-info"><%=comment.user.name %> | <%=comment.createdAt.toDateString('en-us', {weekday:"short", year:"numeric", month:"short"})%></p>
+      <p class="comment-user-info"><%=comment.user.username %> | <%=comment.createdAt.toDateString('en-us', {weekday:"short", year:"numeric", month:"short"})%></p>
       <p><%=comment.content%></p>
       <% if(user && user._id.toString() === comment.user._id.toString()) {%>
         <a href="/comment/<%=comment._id%>">Edit Comment</a>
