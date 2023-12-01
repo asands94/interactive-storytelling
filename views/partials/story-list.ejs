@@ -2,7 +2,7 @@
   <section class="users-stories">
     <div class="stories-top">
       <div>
-      <a href="/stories/<%=story._id%>"><%=story.title%></a> by <%=story.author.name%>
+      <a href="/stories/<%=story._id%>"><%=story.title%></a> by <%=story.author.username%>
     </div>
       <p>
         <%=story.createdAt.toDateString('en-us', {weekday:"short", year:"numeric",

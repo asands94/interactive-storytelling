@@ -24,8 +24,8 @@ router.get(
     {
       // Requesting the user's profile and email
       scope: ['profile', 'email'],
-      // Optionally force pick account every time
-      // prompt: "select_account"
+      // Optionally force user to pick account every time
+      prompt: "select_account"
     }
   )
 )
@@ -33,9 +33,16 @@ router.get(
 router.get(
   '/oauth2callback',
   passport.authenticate('google', {
-    successRedirect: '/',
     failureRedirect: '/',
-  })
+  }), (req, res) => {
+    if (!req.user.username) {
+      // Redirect to edit profile page for new users
+      return res.redirect(`/profile/${req.user._id}`);
+    } else {
+      // Redirect to main page for existing user
+      return res.redirect('/');
+    }
+  }
 )
 
 router.get('/logout', function (req, res) {

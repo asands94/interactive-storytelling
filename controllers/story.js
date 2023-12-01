@@ -34,7 +34,22 @@ const show = async (req, res) => {
 
     const story = await Story.findById(req.params.id).populate('comments.user')
 
-    res.render('stories/show', { story, apiKey: process.env.TINY_API })
+    const pollCount = story.polls.map((poll) => {
+      return poll.votes.reduce((acc, cur) => {
+        const option = cur.selectedOption
+        acc[option] = (acc[option] || 0) + 1
+        return acc
+      }, {})
+    })
+      
+    const pollVotes = story.polls.map((poll) => {
+      const userHasVoted = (user, poll) => {
+        return poll.votes.some((vote) => vote.user && vote.user.equals(user._id))
+      }
+      return {poll, userHasVoted}
+    })
+      
+    res.render('stories/show', { story, pollCount, pollVotes, apiKey: process.env.TINY_API })
   } catch (e) {
     res.redirect('/stories')
   }
