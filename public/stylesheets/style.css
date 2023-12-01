@@ -40,8 +40,15 @@ main {
   margin-bottom: 5vh;
 }
 
+.recent-stories > a {
+  text-decoration: none;
+  margin-top: 5vh
+  /* align-self: flex-start; */
+}
+
 .stories-container {
-  display: flex
+  display: flex;
+  width: 100%;
 }
 
 .stories-content {
