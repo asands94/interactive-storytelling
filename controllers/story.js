@@ -41,7 +41,15 @@ const show = async (req, res) => {
         return acc
       }, {})
     })
-    res.render('stories/show', { story, pollCount, apiKey: process.env.TINY_API })
+      
+    const pollVotes = story.polls.map((poll) => {
+      const userHasVoted = (user, poll) => {
+        return poll.votes.some((vote) => vote.user && vote.user.equals(user._id))
+      }
+      return {poll, userHasVoted}
+    })
+      
+    res.render('stories/show', { story, pollCount, pollVotes, apiKey: process.env.TINY_API })
   } catch (e) {
     res.redirect('/stories')
   }

@@ -21,17 +21,27 @@
   <%}%> 
 <%}%>
 
-<%story.polls.forEach((poll, pollIndex) => { %>
-  <form action="/stories/<%=story._id%>/polls/<%=poll._id%>/vote" method="POST">
-    <p><%=poll.question%></p>
-    <%poll.options.forEach((option) => { %>
-      <label for="<%=option%>">
-      <input type="radio" id="<%=option%>" name="selectedOption" value="<%=option%>"/>
-      <%=option%>
-    </label>
-     <%})%>
-     <button>Vote</button>
+<% pollVotes.forEach(({ poll, userHasVoted }) => { %>
+  <form action="/stories/<%= story._id %>/polls/<%= poll._id %>/vote" method="POST">
+    <p><%= poll.question %></p>
+    <% poll.options.forEach((option) => { %>
+      <label for="<%= option %>">
+        <input type="radio" id="<%= option %>" name="selectedOption" value="<%= option %>" />
+        <%= option %>
+      </label>
+    <% }) %>
+    <% if (user && userHasVoted(user, poll)) { %>
+      <p>You have already voted on this poll.</p>
+    <% } else if(!user) { %>
+      <p>You must be signed in to vote</p>
+      
+    <% } else { %>
+      <button type="submit">Vote</button>
+      <% } %>
   </form>
+<% }) %>
+
+<%story.polls.forEach((poll, pollIndex) => { %>
   <p>Votes</p>
   <ul>
     <% Object.entries(pollCount[pollIndex]).forEach(([option, count]) => { %>
