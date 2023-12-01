@@ -2,7 +2,7 @@
 
 <h2>Edit Your Story: <%=story.title%></h2>
 
-<form action="/stories/<%=story._id%>?_method=PUT" method="POST" class="story-form">
+<form action="/stories/<%=story._id%>?_method=PUT" method="POST" class="story-form" enctype="multipart/form-data">
 
   <label for="edit-rating"><h4>Rating</h4></label>
     <select id="edit-rating" name="rating">
@@ -25,17 +25,33 @@
         </label>
    <% }) %>
 
-   <label for="edit-thumbnail"><h4>Thumbnail</h4></label>
-    <input id="thumbnail" type="text" name="thumbnail" value="<%=story.thumbnail%>"/>
+  <% if(story.thumbnail) {%>
+    <button>delete</button>
+  <% } else { %>
+    <label for="edit-cloudinary-image">
+      Image Upload
+      <input id="edit-cloudinary-image" type="file" name="imageUpload" />
+  </label>
+  <label for="edit-cloudinary-description">
+      Image Description
+      <input id="edit-cloudinary-description" type="text" name="description" />
+  </label>
+  <label for="edit-cloudinary-alt">
+      Image Alt Text
+      <input id="edit-cloudinary-alt" type="text" name="alt" />
+  </label>
+   <% } %>
+
+   
 
     <label for="edit-summary"><h4>Summary</h4></label>
-  <textarea id="edit-summary" name="summary"><%=story.summary%></textarea>
+  <textarea id="edit-summary" name="summary" required><%=story.summary%></textarea>
 
   <label for="edit-title"><h4>Title</h4></label>
-    <input id="edit-title" type="text" name="title" value="<%=story.title%>"/>
+    <input id="edit-title" type="text" name="title" required value="<%=story.title%>"/>
 
     <label for="storytextarea"><h4>Text Editor</h4></label>
-  <textarea id="storytextarea" name="content"><%=story.content%></textarea>
+  <textarea id="storytextarea" name="content" required><%=story.content%></textarea>
   <button type="submit">Update Story</button>
 </form>
 

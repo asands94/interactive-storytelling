@@ -25,7 +25,7 @@ const commentSchema = new Schema(
 
 const thumbnailSchema = new Schema(
   {
-    url: { type: String, required: true },
+    url: { type: String},
     description: { type: String },
     alt: {type: String, default: "story cover"}
   }, 
@@ -45,14 +45,14 @@ const storySchema = new Schema(
     thumbnail: thumbnailSchema,
     title: { type: String, required: true },
     content: { type: String, required: true },
-    author: { type: Schema.Types.ObjectId, ref: 'User' },
+    author: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     tags: { type: String, enum: ['none'] },
     warning: {
       type: [String],
       enum: Object.values(storyWarnings),
     },
     rating: { type: String, enum: ['General', 'Teen', 'Mature', 'Explicit'], default: 'Explicit' },
-    summary: { type: String },
+    summary: { type: String, required: true },
     comments: [commentSchema],
     polls: [pollSchema]
   },

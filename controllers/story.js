@@ -45,15 +45,14 @@ const create = async (req, res) => {
     req.body.author = req.user
     const story = await Story.create(req.body)
 
-    
     // photo upload
-    let result = await streamUpload(req);
-    console.log(req.body);
-
-    const newImage = { url: result.url, description: req.body.description, alt: req.body.alt }
-    story.thumbnail = newImage
-
-    await story.save()
+    if (req.file) {
+      let result = await streamUpload(req);
+      const newImage = { url: result.url, description: req.body.description, alt: req.body.alt }
+      story.thumbnail = newImage
+   
+      await story.save()
+    }
 
     const user = await User.findById(req.user._id)
 
@@ -96,6 +95,16 @@ const update = async (req, res) => {
 
     const story = await Story.findByIdAndUpdate(id, req.body, { new: true })
 
+    // photo upload
+
+    if (req.file) {
+      let result = await streamUpload(req);
+      const newImage = { url: result.url, description: req.body.description, alt: req.body.alt }
+      story.thumbnail = newImage
+   
+      await story.save()
+    }
+
     res.redirect(`/stories/${story._id}`)
   } catch (e) {
     res.status(424).json({ error: e.message })
@@ -118,7 +127,6 @@ function streamUpload (req) {
   return new Promise((resolve, reject) => {
     let stream = cloudinary.uploader.upload_stream((error, result) => {
       if (result) {
-        console.log(result);
         resolve(result);
       } else {
         reject(error);
