@@ -11,6 +11,7 @@ const userSchema = new Schema(
     },
     email: String,
     avatar: String,
+    username: String,
     stories: [{ type: Schema.Types.ObjectId, ref: 'Story'}]
   },
   {
