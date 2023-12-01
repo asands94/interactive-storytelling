@@ -2,7 +2,7 @@
 
 <h2>Start a New Story</h2>
 
-<form action="/stories" method="POST" class="story-form">
+<form action="/stories" method="POST" class="story-form" enctype="multipart/form-data">
 
   <label for="new-rating"><h4>Rating</h4></label>
     <select id="new-rating" name="rating">
@@ -22,16 +22,25 @@
         </label>
    <% }) %>
   
-
-  <label for="new-thumbail"><h4>Thumbnail</h4></label>
-    <input id="new-thumbnail" type="text" name="thumbnail" placeholder="Input a URL"/>
+    <label for="new-cloudinary-image">
+      Image Upload
+      <input id="new-cloudinary-image" type="file" name="imageUpload"/>
+  </label>
+  <label for="new-cloudinary-description">
+      Image Description
+      <input id="new-cloudinary-description" type="text" name="description" />
+  </label>
+  <label for="new-cloudinary-alt">
+      Image Alt Text
+      <input id="new-cloudinary-alt" type="text" name="alt" />
+  </label>
   
 
   <label for="new-summary"><h4>Summary</h4></label>
-  <textarea id="new-summary" name="summary"></textarea>
+  <textarea id="new-summary" name="summary" required></textarea>
 
   <label for="new-title"><h4>Title</h4></label>
-    <input id="new-title" type="text" name="title" />
+    <input id="new-title" type="text" name="title" required />
   
 
   <label for="storytextarea"><h4>Text Editor</h4></label>

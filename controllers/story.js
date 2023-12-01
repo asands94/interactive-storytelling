@@ -1,6 +1,12 @@
 const Story = require('../models/story')
 const User = require('../models/user')
 
+const cloudinary = require('cloudinary').v2
+const streamifier = require("streamifier");
+const { clConfig } = require("../config/cloudinary.js");
+
+cloudinary.config(clConfig);
+
 const index = async (req, res) => {
   try {
     const stories = await Story.find({})
@@ -38,6 +44,15 @@ const create = async (req, res) => {
   try {
     req.body.author = req.user
     const story = await Story.create(req.body)
+
+    // photo upload
+    if (req.file) {
+      let result = await streamUpload(req);
+      const newImage = { url: result.url, description: req.body.description, alt: req.body.alt }
+      story.thumbnail = newImage
+   
+      await story.save()
+    }
 
     const user = await User.findById(req.user._id)
 
@@ -80,6 +95,16 @@ const update = async (req, res) => {
 
     const story = await Story.findByIdAndUpdate(id, req.body, { new: true })
 
+    // photo upload
+
+    if (req.file) {
+      let result = await streamUpload(req);
+      const newImage = { url: result.url, description: req.body.description, alt: req.body.alt }
+      story.thumbnail = newImage
+   
+      await story.save()
+    }
+
     res.redirect(`/stories/${story._id}`)
   } catch (e) {
     res.status(424).json({ error: e.message })
@@ -90,13 +115,32 @@ const deleteStory = async (req, res) => {
   try {
     const id = req.params.id
 
-    await Story.findByIdAndDelete(id)
+    const story = await Story.findByIdAndDelete(id)
+
+    req.user.stories = req.user.stories.filter((storyId) => {
+      storyId._id.toString() !== story._id.toString()
+    })
+
+    req.user.save()
 
     res.redirect(`/stories`)
   } catch (e) {
     res.status(404).json({ error: e.message })
   }
 }
+
+function streamUpload (req) {
+  return new Promise((resolve, reject) => {
+    let stream = cloudinary.uploader.upload_stream((error, result) => {
+      if (result) {
+        resolve(result);
+      } else {
+        reject(error);
+      }
+    });
+    streamifier.createReadStream(req.file.buffer).pipe(stream);
+  });
+};
 
 module.exports = {
   index,

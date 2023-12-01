@@ -11,7 +11,7 @@
  <% limitedStories.forEach((story) => { %>
   <div class="stories-content">
   <% if(story.thumbnail) { %>
-    <img src="<%=story.thumbnail%>" class="story-thumbnail" alt="<%=story.title%> cover" />
+    <img src="<%=story.thumbnail.url%>" class="story-thumbnail" alt="<%=story.thumbnail.alt%>" />
  <% } else { %> 
   <img src="stylesheets/book.png" class="story-thumbnail" alt="<%=story.title%> cover" />
   <%}%>
