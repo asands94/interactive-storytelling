@@ -21,7 +21,7 @@
   <%}%> 
 <%}%>
 
-<%story.polls.forEach((poll) => { %>
+<%story.polls.forEach((poll, pollIndex) => { %>
   <form action="/stories/<%=story._id%>/polls/<%=poll._id%>/vote" method="POST">
     <p><%=poll.question%></p>
     <%poll.options.forEach((option) => { %>
@@ -32,8 +32,14 @@
      <%})%>
      <button>Vote</button>
   </form>
-  
+  <p>Votes</p>
+  <ul>
+    <% Object.entries(pollCount[pollIndex]).forEach(([option, count]) => { %>
+      <li><%= option %>: <%= count %></li>
+    <% }) %>
+  </ul>
 <%})%>
+
 
 <section class="comments-section">
   <h4>Comments</h4>
