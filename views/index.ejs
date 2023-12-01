@@ -2,7 +2,12 @@
 
 <section class="hero-section">
   <img src="stylesheets/simple-hero.png" alt="" class="hero-image"/>
-  <a href="/auth/google" class="join-cta">Join Now</a>
+  <% if(user) { %>
+    <a href="/stories" class="main-cta">Browse Stories</a>
+  <% } else { %>
+    <a href="/auth/google" class="main-cta">Join Now</a>
+  <% } %>
+  
 </section>
 
 <section class="recent-stories">

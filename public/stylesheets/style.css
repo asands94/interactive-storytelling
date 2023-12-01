@@ -11,7 +11,7 @@
   height: auto
 }
 
-.join-cta, .read-cta {
+.main-cta, .read-cta {
   border-radius: 0.25rem;
   background: #3E81ED;
   height: 2.5rem;
