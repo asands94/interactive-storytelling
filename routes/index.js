@@ -25,7 +25,7 @@ router.get(
       // Requesting the user's profile and email
       scope: ['profile', 'email'],
       // Optionally force user to pick account every time
-      // prompt: "select_account"
+      prompt: "select_account"
     }
   )
 )
@@ -33,7 +33,6 @@ router.get(
 router.get(
   '/oauth2callback',
   passport.authenticate('google', {
-    // successRedirect: '/',
     failureRedirect: '/',
   }), (req, res) => {
     if (!req.user.username) {
