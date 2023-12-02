@@ -1,11 +1,11 @@
-import LoginButton from './components/LoginButton'
-import LogoutButton from './components/LogoutButton'
+import Header from './components/header/Header'
+import Main from './components/Main'
 
 function App() {
   return (
     <>
-      <LoginButton />
-      <LogoutButton />
+      <Header />
+      <Main />
     </>
   )
 }
