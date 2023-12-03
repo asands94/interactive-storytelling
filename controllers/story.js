@@ -2,16 +2,14 @@ const Story = require('../models/story')
 const User = require('../models/user')
 
 const cloudinary = require('cloudinary').v2
-const streamifier = require("streamifier");
-const { clConfig } = require("../config/cloudinary.js");
+const streamifier = require('streamifier')
+const { clConfig } = require('../config/cloudinary.js')
 
-cloudinary.config(clConfig);
+cloudinary.config(clConfig)
 
 const index = async (req, res) => {
   try {
-    const stories = await Story.find({}).populate('author')
-
-    res.render('stories/index', { stories, apiKey: process.env.TINY_API })
+    res.json(await Story.find({}).populate('author'))
   } catch (e) {
     res.status(404).json({ error: e.message })
   }
@@ -31,9 +29,9 @@ const newStory = (req, res) => {
 
 const show = async (req, res) => {
   try {
-
     const story = await Story.findById(req.params.id).populate('comments.user')
 
+    // count how many times each option in a poll was selected
     const pollCount = story.polls.map((poll) => {
       return poll.votes.reduce((acc, cur) => {
         const option = cur.selectedOption
@@ -41,17 +39,26 @@ const show = async (req, res) => {
         return acc
       }, {})
     })
-      
+
+    // ensure a user can only vote on a poll once
     const pollVotes = story.polls.map((poll) => {
       const userHasVoted = (user, poll) => {
-        return poll.votes.some((vote) => vote.user && vote.user.equals(user._id))
+        return poll.votes.some(
+          (vote) => vote.user && vote.user.equals(user._id)
+        )
       }
-      return {poll, userHasVoted}
+      return { poll, userHasVoted }
     })
-      
-    res.render('stories/show', { story, pollCount, pollVotes, apiKey: process.env.TINY_API })
+
+    // res.render('stories/show', {
+    //   story,
+    //   pollCount,
+    //   pollVotes,
+    //   apiKey: process.env.TINY_API,
+    // })
+    res.json(await Story.findById(req.params.id).populate('comments.user'))
   } catch (e) {
-    res.redirect('/stories')
+    res.status(404).json({ error: e.message })
   }
 }
 
@@ -62,10 +69,14 @@ const create = async (req, res) => {
 
     // photo upload
     if (req.file) {
-      let result = await streamUpload(req);
-      const newImage = { url: result.url, description: req.body.description, alt: req.body.alt }
+      let result = await streamUpload(req)
+      const newImage = {
+        url: result.url,
+        description: req.body.description,
+        alt: req.body.alt,
+      }
       story.thumbnail = newImage
-   
+
       await story.save()
     }
 
@@ -74,7 +85,7 @@ const create = async (req, res) => {
     user.stories.push(story)
 
     await user.save()
-    
+
     res.redirect(`/stories/${story._id}`)
   } catch (e) {
     res.status(500).json({ error: e.message })
@@ -91,7 +102,7 @@ const editStory = async (req, res) => {
     const currentRating = story.rating
 
     const selectedWarnings = story.warning
-   
+
     res.render('stories/edit', {
       story,
       currentRating,
@@ -113,10 +124,14 @@ const update = async (req, res) => {
     // photo upload
 
     if (req.file) {
-      let result = await streamUpload(req);
-      const newImage = { url: result.url, description: req.body.description, alt: req.body.alt }
+      let result = await streamUpload(req)
+      const newImage = {
+        url: result.url,
+        description: req.body.description,
+        alt: req.body.alt,
+      }
       story.thumbnail = newImage
-   
+
       await story.save()
     }
 
@@ -144,18 +159,18 @@ const deleteStory = async (req, res) => {
   }
 }
 
-function streamUpload (req) {
+function streamUpload(req) {
   return new Promise((resolve, reject) => {
     let stream = cloudinary.uploader.upload_stream((error, result) => {
       if (result) {
-        resolve(result);
+        resolve(result)
       } else {
-        reject(error);
+        reject(error)
       }
-    });
-    streamifier.createReadStream(req.file.buffer).pipe(stream);
-  });
-};
+    })
+    streamifier.createReadStream(req.file.buffer).pipe(stream)
+  })
+}
 
 module.exports = {
   index,
