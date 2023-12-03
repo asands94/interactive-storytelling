@@ -64,7 +64,7 @@ const show = async (req, res) => {
 
 const create = async (req, res) => {
   try {
-    req.body.author = req.user
+    // req.body.author = req.user
     const story = await Story.create(req.body)
 
     // photo upload
@@ -80,13 +80,15 @@ const create = async (req, res) => {
       await story.save()
     }
 
-    const user = await User.findById(req.user._id)
+    // const user = await User.findById(req.user._id)
 
-    user.stories.push(story)
+    // user.stories.push(story)
 
-    await user.save()
+    // await user.save()
 
-    res.redirect(`/stories/${story._id}`)
+    res.status(201).json(story)
+
+    // res.redirect(`/stories/${story._id}`)
   } catch (e) {
     res.status(500).json({ error: e.message })
   }
