@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useAuth0 } from '@auth0/auth0-react'
 import TinyMCE from './TinyMCE'
 import { createStory } from '../../services/story'
+import { Navigate, redirect, useNavigate } from 'react-router'
 
 const StoryForm = () => {
   const { user } = useAuth0()
@@ -11,9 +12,11 @@ const StoryForm = () => {
     summary: '',
     warning: '',
     rating: '',
-    thumbnail: '',
-    author: user?.name,
+    // thumbnail: '',
+    // author: user?.name,
   })
+
+  const navigate = useNavigate()
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -26,16 +29,8 @@ const StoryForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const storyData = await createStory(form)
-    setForm({
-      ...form,
-      title: '',
-      content: '',
-      summary: '',
-      warning: '',
-      rating: '',
-      thumbnail: '',
-    })
+    await createStory(form)
+    navigate('/stories')
   }
 
   const warningOptions = ['Violence', 'Trauma', 'Drug Use']
@@ -81,7 +76,7 @@ const StoryForm = () => {
           </label>
         ))}
 
-        <label htmlFor='new-cloudinary-image'>
+        {/* <label htmlFor='new-cloudinary-image'>
           Image Upload
           <input id='new-cloudinary-image' type='file' name='imageUpload' />
         </label>
@@ -102,7 +97,7 @@ const StoryForm = () => {
             onChange={handleChange}
             name='alt'
           />
-        </label>
+        </label> */}
 
         <label htmlFor='new-summary'>
           <h4>Summary</h4>

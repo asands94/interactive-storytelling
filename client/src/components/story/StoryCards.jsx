@@ -31,7 +31,7 @@ const StoryCards = (props) => {
           <div className='stories-top'>
             <div>
               <a href={`/stories/${story._id}`}>{story.title}</a> by{' '}
-              {story.author.username}
+              {story.author?.username}
             </div>
             <p>
               {new Date(story.createdAt).toDateString('en-us', {
