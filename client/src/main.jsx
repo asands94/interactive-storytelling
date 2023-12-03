@@ -5,10 +5,10 @@ import { BrowserRouter as Router } from 'react-router-dom'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Auth0Provider
-    domain='dev-trv-jqp4.us.auth0.com'
-    clientId='PrjwpzH74AsyKupmX65cn2oy6OQzs7p3'
+    domain={import.meta.env.VITE_APP_AUTH0_DOMAIN}
+    clientId={import.meta.env.VITE_APP_AUTH0_CLIENT_ID}
     authorizationParams={{
-      redirect_uri: window.location.origin,
+      redirect_uri: import.meta.env.VITE_APP_AUTH0_CALLBACK_URL,
     }}
   >
     <Router>
