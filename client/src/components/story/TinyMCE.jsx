@@ -3,6 +3,7 @@ import { Editor } from '@tinymce/tinymce-react'
 
 export default function TinyMCE() {
   const editorRef = useRef(null)
+
   const log = () => {
     if (editorRef.current) {
       console.log(editorRef.current.getContent())
@@ -31,10 +32,10 @@ export default function TinyMCE() {
             'wordcount',
           ],
           toolbar:
-            'restoredraft undo redo | blocks fontsize | bold italic underline strikethrough | align | checklist numlist bullist indent outdent | removeformat',
+            'restoredraft undo redo | blocks | | hr blockquote | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | indent outdent | removeformat',
         }}
       />
-      <button onClick={log}>Log editor content</button>
+      <button onClick={log}>Submit</button>
     </>
   )
 }
