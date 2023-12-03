@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { getStories } from '../../utilities/stories/stories-service'
+import { getStories } from '../../services/story'
 
 const StoryCards = (props) => {
   const [isLoading, setIsLoading] = useState(true)

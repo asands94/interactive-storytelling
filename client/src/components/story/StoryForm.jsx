@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useAuth0 } from '@auth0/auth0-react'
 import TinyMCE from './TinyMCE'
+import { createStory } from '../../services/story'
 
 const StoryForm = () => {
   const { user } = useAuth0()
@@ -23,8 +24,9 @@ const StoryForm = () => {
     setForm((prevForm) => ({ ...prevForm, content }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
+    const storyData = await createStory(form)
     setForm({
       ...form,
       title: '',
