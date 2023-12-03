@@ -23,6 +23,7 @@ const app = express()
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 
+app.use(cors())
 app.use(logger('dev'))
 app.use(methodOverride('_method'))
 app.use(express.json())
@@ -60,9 +61,8 @@ app.use((err, req, res, next) => {
   res.locals.error = req.app.get('env') === 'development' ? err : {}
 
   res.status(err.status || 500)
-  res.render('error', {apiKey: process.env.TINY_API} )
+  res.render('error', { apiKey: process.env.TINY_API })
 })
-
 
 app.listen(PORT, () => {
   console.log(`Listening on port: ${PORT}`)
