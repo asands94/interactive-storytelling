@@ -9,10 +9,9 @@ const pollSchema = new Schema(
     votes: [
       {
         user: { type: Schema.Types.ObjectId, ref: 'User' },
-        selectedOption: { type: String }
-      }
-    ]
-    
+        selectedOption: { type: String },
+      },
+    ],
   },
   {
     timestamps: true,
@@ -31,36 +30,40 @@ const commentSchema = new Schema(
 
 const thumbnailSchema = new Schema(
   {
-    url: { type: String},
+    url: { type: String },
     description: { type: String },
-    alt: {type: String, default: "story cover"}
-  }, 
+    alt: { type: String, default: 'story cover' },
+  },
   {
-    timestamps: true
+    timestamps: true,
   }
 )
 
 const storyWarnings = Object.freeze({
   VIOLENCE: 'Violence',
   TRAUMA: 'Trauma',
-  DRUG_USE: 'Drug Use'
+  DRUG_USE: 'Drug Use',
 })
 
 const storySchema = new Schema(
   {
     thumbnail: thumbnailSchema,
     title: { type: String, required: true },
-    content: { type: String, required: true },
-    author: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+    content: { type: String, required: false },
+    author: { type: Schema.Types.ObjectId, ref: 'User', required: false },
     tags: { type: String, enum: ['none'] },
     warning: {
       type: [String],
       enum: Object.values(storyWarnings),
     },
-    rating: { type: String, enum: ['General', 'Teen', 'Mature', 'Explicit'], default: 'Explicit' },
-    summary: { type: String, required: true },
+    rating: {
+      type: String,
+      enum: ['General', 'Teen', 'Mature', 'Explicit'],
+      default: 'Explicit',
+    },
+    summary: { type: String, required: false },
     comments: [commentSchema],
-    polls: [pollSchema]
+    polls: [pollSchema],
   },
   {
     timestamps: true,
