@@ -25,17 +25,17 @@ router.get(
   (req, res) => {
     if (!req.user.username) {
       // Redirect to edit profile page for new users
-      res.redirect('http://localhost:5173/stories/new')
+      res.redirect(process.env.NEW_USER_REDIRECT)
     } else {
       // Redirect to main page for existing user
-      res.redirect('http://localhost:5173/stories')
+      res.redirect(process.env.LOGOUT_EXISTING_USER_REDIRECT)
     }
   }
 )
 
 router.get('/logout', function (req, res) {
   req.logout(function () {
-    res.redirect('http://localhost:5173/stories')
+    res.redirect(process.env.LOGOUT_EXISTING_USER_REDIRECT)
   })
 })
 
