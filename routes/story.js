@@ -12,7 +12,7 @@ router.get('/new', ensureLoggedIn, storyCtrl.newStory)
 
 router.get('/:id', storyCtrl.show) //refactored
 
-router.post('/', ensureLoggedIn, upload.single('imageUpload'), storyCtrl.create)
+router.post('/', upload.single('imageUpload'), storyCtrl.create) //slightly refactored
 
 router.get('/:id/edit', ensureLoggedIn, storyCtrl.editStory)
 
