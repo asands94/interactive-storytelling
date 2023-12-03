@@ -5,14 +5,10 @@ const Schema = mongoose.Schema
 const userSchema = new Schema(
   {
     name: String,
-    googleId: {
-      type: String,
-      required: true,
-    },
+    googleId: String,
     email: String,
-    avatar: String,
     username: String,
-    stories: [{ type: Schema.Types.ObjectId, ref: 'Story'}]
+    stories: [{ type: Schema.Types.ObjectId, ref: 'Story' }],
   },
   {
     timestamps: true,

@@ -1,13 +1,11 @@
-import { useAuth0 } from "@auth0/auth0-react";
+import { Link } from 'react-router-dom'
 
 const LogoutButton = () => {
-  const { logout } = useAuth0();
-
   return (
-    <button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
-      Log Out
-    </button>
-  );
-};
+    <Link to='http://localhost:3000/logout'>
+      <button>Logout</button>
+    </Link>
+  )
+}
 
-export default LogoutButton;
+export default LogoutButton
