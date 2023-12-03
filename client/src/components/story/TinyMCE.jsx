@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import { Editor } from '@tinymce/tinymce-react'
 
-export default function TinyMCE() {
+export default function TinyMCE({ handleChange }) {
   const editorRef = useRef(null)
 
   const log = () => {
@@ -12,6 +12,7 @@ export default function TinyMCE() {
   return (
     <>
       <Editor
+        onEditorChange={handleChange}
         apiKey={import.meta.env.VITE_APP_API_KEY}
         onInit={(evt, editor) => (editorRef.current = editor)}
         initialValue=''
@@ -35,7 +36,7 @@ export default function TinyMCE() {
             'restoredraft undo redo | blocks | | hr blockquote | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | indent outdent | removeformat',
         }}
       />
-      <button onClick={log}>Submit</button>
+      {/* <button onClick={log}>Submit</button> */}
     </>
   )
 }
