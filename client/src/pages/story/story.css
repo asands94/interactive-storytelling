@@ -1,0 +1,26 @@
+.users-stories {
+  border: solid rgb(227, 227, 227) 1px;
+  margin-top: 2vh;
+  display: flex;
+  flex-direction: column;
+  padding: 10px
+}
+
+.users-stories > p {
+  margin: 15px 0
+}
+
+.stories-top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.admin {
+  display: flex;
+  justify-content: space-between;
+}
+
+.buttons {
+  height: fit-content
+}
+
