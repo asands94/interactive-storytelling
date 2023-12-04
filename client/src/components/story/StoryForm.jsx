@@ -1,11 +1,9 @@
 import { useState } from 'react'
-import { useAuth0 } from '@auth0/auth0-react'
 import TinyMCE from './TinyMCE'
 import { createStory } from '../../services/story'
 import { Navigate, redirect, useNavigate } from 'react-router'
 
 const StoryForm = () => {
-  const { user } = useAuth0()
   const [form, setForm] = useState({
     title: '',
     content: '',

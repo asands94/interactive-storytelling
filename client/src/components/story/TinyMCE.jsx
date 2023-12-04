@@ -13,7 +13,7 @@ export default function TinyMCE({ handleChange }) {
     <>
       <Editor
         onEditorChange={handleChange}
-        apiKey={import.meta.env.VITE_APP_API_KEY}
+        apiKey={import.meta.env.VITE_APP_TINY_API_KEY}
         onInit={(evt, editor) => (editorRef.current = editor)}
         initialValue=''
         init={{

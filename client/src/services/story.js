@@ -2,7 +2,7 @@ import api from './apiConfig'
 
 export const getStories = async () => {
   try {
-    const res = await api.get('/')
+    const res = await api.get('/stories')
     return res.data
   } catch (e) {
     console.log(e)
@@ -12,7 +12,7 @@ export const getStories = async () => {
 
 export const getStory = async (id) => {
   try {
-    const res = await api.get(`/${id}`)
+    const res = await api.get(`/stories/${id}`)
     return res.data
   } catch (e) {
     throw e
@@ -21,7 +21,7 @@ export const getStory = async (id) => {
 
 export const createStory = async (input) => {
   try {
-    const res = await api.post('/', input)
+    const res = await api.post('/stories', input)
     return res.data
   } catch (e) {
     console.log(e)
